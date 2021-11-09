@@ -1,16 +1,12 @@
-﻿using Microsoft.ApplicationInsights;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation.Results;
 using System.Text.Json;
-using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace AdForm.SDK
 {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AdForm.SDK
+﻿namespace AdForm.SDK
 {
     public static class ApiErrorMessage
     {

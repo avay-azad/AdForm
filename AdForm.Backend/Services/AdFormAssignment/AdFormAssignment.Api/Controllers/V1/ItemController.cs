@@ -1,7 +1,5 @@
 ﻿using AdForm.SDK;
 using AdFormAssignment.Business;
-using AdFormAssignment.Shared;
-using AutoMapper;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;

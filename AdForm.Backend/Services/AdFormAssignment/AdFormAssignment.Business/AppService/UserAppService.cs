@@ -1,12 +1,11 @@
 ﻿using AdForm.Entities;
 using AdForm.SDK;
 using AdFormAssignment.DataService;
+using AdFormAssignment.Shared;
 using AutoMapper;
-using System;
+using Microsoft.Extensions.Options;
 using System.Net;
 using System.Threading.Tasks;
-using AdFormAssignment.Shared;
-using Microsoft.Extensions.Options;
 
 namespace AdFormAssignment.Business
 {

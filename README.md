@@ -14,19 +14,29 @@ Added support for GraphQL and unit test cases.
 How to run application
 
 Step 1: Clone repo:
-git clone https://github.com/vinaytripathi86/Adform_Assignment.git
+git clone https://github.com/avay-azad/AdForm.git
 
-Step 2: Go the folder "Homework_Adform" and run
+Step 2: Go the folder "AdForm.Backend" and run
 “dotnet restore”
 
-Step 3: Go the folder “Homework_Adform\API” and run 
+Step 3: Go the folder “AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api” and run 
 “dotnet run”
 
 Navigate to http://localhost:5000/ in a browser to play with the Swagger UI.
+Navigate to https://localhost:5001/ in a browser to play with the Swagger UI.
+
 
 Authorization
 
 Send token in "Authorization" header as "Bearer <token>" (Example: "Bearer sampletoken")
 
 Note
-Search field is available in PaginationParameters type.
+=>Search field is available in PaginationParameters type.
+
+=>In Version please pass 1.
+
+
+I have created 3 user 
+1)UserName = "avay",Password = "Avay@123"
+1)UserName = "amar",Password = "Amar@123",
+1)UserName = "azad",Password = "Azad@123",

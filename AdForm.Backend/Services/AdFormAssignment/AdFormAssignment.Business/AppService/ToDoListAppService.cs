@@ -4,11 +4,9 @@ using AdFormAssignment.DataService;
 using AdFormAssignment.Shared;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AdFormAssignment.Business

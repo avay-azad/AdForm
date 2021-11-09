@@ -1,14 +1,13 @@
 ﻿using AdForm.Entities;
-using AdFormAssignment.DataService;
-using AutoMapper;
-using System;
 using AdForm.SDK;
-using System.Threading.Tasks;
+using AdFormAssignment.DataService;
 using AdFormAssignment.Shared;
-using System.Net;
+using AutoMapper;
+using Microsoft.AspNetCore.JsonPatch;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.JsonPatch;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace AdFormAssignment.Business
 {

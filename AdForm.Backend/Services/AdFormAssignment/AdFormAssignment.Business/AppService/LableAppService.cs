@@ -3,10 +3,8 @@ using AdForm.SDK;
 using AdFormAssignment.DataService;
 using AdFormAssignment.Shared;
 using AutoMapper;
-using System;
 using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace AdFormAssignment.Business

@@ -24,7 +24,8 @@
     {
         ItemAlreadyExists,
         ItemNotfound,
-        UnsupportedAppVersion
+        UnsupportedAppVersion,
+        ValidationError
     }
 
 
