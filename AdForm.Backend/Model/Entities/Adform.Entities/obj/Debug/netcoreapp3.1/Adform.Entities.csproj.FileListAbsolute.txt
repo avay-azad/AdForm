@@ -1,0 +1,16 @@
+C:\My Project\AdForm.Backend\Model\Entities\Adform.Entities\bin\Debug\netcoreapp3.1\AdForm.Entities.deps.json
+C:\My Project\AdForm.Backend\Model\Entities\Adform.Entities\bin\Debug\netcoreapp3.1\AdForm.Entities.dll
+C:\My Project\AdForm.Backend\Model\Entities\Adform.Entities\bin\Debug\netcoreapp3.1\AdForm.Entities.pdb
+C:\My Project\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.AssemblyInfoInputs.cache
+C:\My Project\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.AssemblyInfo.cs
+C:\My Project\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.dll
+C:\My Project\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.pdb
+C:\My Project\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.csprojAssemblyReference.cache
+C:\ProjectAssignment\AdForm.Backend\Model\Entities\Adform.Entities\bin\Debug\netcoreapp3.1\AdForm.Entities.deps.json
+C:\ProjectAssignment\AdForm.Backend\Model\Entities\Adform.Entities\bin\Debug\netcoreapp3.1\AdForm.Entities.dll
+C:\ProjectAssignment\AdForm.Backend\Model\Entities\Adform.Entities\bin\Debug\netcoreapp3.1\AdForm.Entities.pdb
+C:\ProjectAssignment\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.csprojAssemblyReference.cache
+C:\ProjectAssignment\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.AssemblyInfoInputs.cache
+C:\ProjectAssignment\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.AssemblyInfo.cs
+C:\ProjectAssignment\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.dll
+C:\ProjectAssignment\AdForm.Backend\Model\Entities\Adform.Entities\obj\Debug\netcoreapp3.1\AdForm.Entities.pdb

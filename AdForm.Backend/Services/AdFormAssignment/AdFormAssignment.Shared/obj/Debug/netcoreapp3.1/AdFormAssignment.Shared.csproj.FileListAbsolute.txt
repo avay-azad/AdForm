@@ -1,0 +1,15 @@
+C:\My Project\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\bin\Debug\netcoreapp3.1\AdFormAssignment.Shared.deps.json
+C:\My Project\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\bin\Debug\netcoreapp3.1\AdFormAssignment.Shared.dll
+C:\My Project\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\bin\Debug\netcoreapp3.1\AdFormAssignment.Shared.pdb
+C:\My Project\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.AssemblyInfoInputs.cache
+C:\My Project\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.AssemblyInfo.cs
+C:\My Project\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.dll
+C:\My Project\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.pdb
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\bin\Debug\netcoreapp3.1\AdFormAssignment.Shared.deps.json
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\bin\Debug\netcoreapp3.1\AdFormAssignment.Shared.dll
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\bin\Debug\netcoreapp3.1\AdFormAssignment.Shared.pdb
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.csprojAssemblyReference.cache
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.AssemblyInfoInputs.cache
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.AssemblyInfo.cs
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.dll
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Shared\obj\Debug\netcoreapp3.1\AdFormAssignment.Shared.pdb

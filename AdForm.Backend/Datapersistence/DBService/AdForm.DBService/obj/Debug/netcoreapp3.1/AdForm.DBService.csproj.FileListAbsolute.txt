@@ -1,0 +1,26 @@
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.deps.json
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.runtimeconfig.json
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.runtimeconfig.dev.json
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.dll
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.pdb
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.Entities.dll
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.Entities.pdb
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.csprojAssemblyReference.cache
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.AssemblyInfoInputs.cache
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.AssemblyInfo.cs
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.csproj.CopyComplete
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.dll
+C:\My Project\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.pdb
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.deps.json
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.runtimeconfig.json
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.runtimeconfig.dev.json
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.dll
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.DBService.pdb
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.Entities.dll
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\bin\Debug\netcoreapp3.1\AdForm.Entities.pdb
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.csprojAssemblyReference.cache
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.AssemblyInfoInputs.cache
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.AssemblyInfo.cs
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.csproj.CopyComplete
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.dll
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\DBService\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.pdb
