@@ -7,6 +7,7 @@ using AdForm.SDK;
 using AdFormAssignment.Business;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,9 @@ using Newtonsoft.Json;
 
 namespace AdFormAssignment.Api.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Authorize]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/todo/[controller]")]
     [ApiController]
     public class ListController : ControllerBase
     {

@@ -18,7 +18,7 @@ namespace AdFormAssignment.Api.Controllers.V1
 {
     [Authorize]
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/todo/[controller]")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class LabelController : ControllerBase
     {
@@ -87,6 +87,54 @@ namespace AdFormAssignment.Api.Controllers.V1
             await _lableAppService.DeleteAsync(id);
 
             return Ok(new APIResponse<object> { IsSucess = true, Result = null });
+        }
+
+        /// <summary>
+        /// Assign label to list
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="id"></param>
+        /// <param name="toDoListAppService"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AssignLabelToList([FromBody] AssignLabelRequestDto request, [FromRoute] long id
+            , [FromServices] IToDoListAppService toDoListAppService)
+        {
+            var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
+
+            var label = _lableAppService.GetAsync(id);
+            if (label == null)
+                throw new ApiException(ErrorMessage.Label_Not_Exist_assign, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+
+            request.LabelId = id;
+            request.UserId = userId;
+
+            bool isAssigned = await toDoListAppService.AssignLabel(request);
+            return Ok(new APIResponse<object> { IsSucess = isAssigned, Result = null });
+        }
+
+        /// <summary>
+        /// Assign label to item
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="id"></param>
+        /// <param name="toDoItemAppService"></param>
+        /// <returns></returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> AssignLabelToItem([FromBody] AssignLabelRequestDto request, [FromRoute] long id
+           , [FromServices] IToDoItemAppService toDoItemAppService)
+        {
+            var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
+
+            var label = _lableAppService.GetAsync(id);
+            if (label == null)
+                throw new ApiException(ErrorMessage.Label_Not_Exist_assign, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+
+            request.LabelId = id;
+            request.UserId = userId;
+
+            bool isAssigned = await toDoItemAppService.AssignLabel(request);
+            return Ok(new APIResponse<object> { IsSucess = isAssigned, Result = null });
         }
     }
 }

@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\AdForm.SDK\AdForm.SDK.csproj" />
     <ProjectReference Include="..\..\..\Datapersistence\DBService\AdForm.DBService\AdForm.DBService.csproj" />
     <ProjectReference Include="..\..\..\Model\Entities\Adform.Entities\AdForm.Entities.csproj" />
   </ItemGroup>

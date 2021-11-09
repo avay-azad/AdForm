@@ -6,6 +6,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using AdFormAssignment.Shared;
+using Microsoft.Extensions.Options;
 
 namespace AdFormAssignment.Business
 {
@@ -13,16 +14,17 @@ namespace AdFormAssignment.Business
     {
         private readonly IUserDataService _userDataService;
         private readonly IMapper _mapper;
+        private readonly AppSettings _appSettings;
 
         /// <summary>
         /// Create new instance of <see cref="UserAppService"/> class.
         /// </summary>
         /// <param name="userDataService"></param>
-        public UserAppService(IUserDataService userDataService, IMapper mapper)
+        public UserAppService(IUserDataService userDataService, IMapper mapper, IOptions<AppSettings> appSettings)
         {
             _userDataService = userDataService;
             _mapper = mapper;
-
+            _appSettings = appSettings.Value;
         }
 
         /// <summary>
@@ -35,7 +37,10 @@ namespace AdFormAssignment.Business
             var user = await _userDataService.GetUsers(_mapper.Map<Users>(loginRequestDto));
             if (user == null)
                 throw new AuthenticationException(ErrorMessage.User_Invalid_Login, HttpStatusCode.Unauthorized, AuthenticationExceptionType.Unauthorized);
-            return user.Id;
+            else if (AesSymmetric.AesDecrypt(user.Password, _appSettings.AesSymmetricKey) == loginRequestDto.Password)
+                return user.Id;
+            else
+                throw new AuthenticationException(ErrorMessage.User_Invalid_Login, HttpStatusCode.Unauthorized, AuthenticationExceptionType.Unauthorized);
         }
     }
 }

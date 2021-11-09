@@ -315,6 +315,18 @@
               "target": "Package",
               "version": "[2.0.1, )"
             },
+            "HotChocolate.AspNetCore": {
+              "target": "Package",
+              "version": "[10.5.2, )"
+            },
+            "HotChocolate.AspNetCore.Playground": {
+              "target": "Package",
+              "version": "[10.5.5, )"
+            },
+            "HotChocolate.Types.Filters": {
+              "target": "Package",
+              "version": "[10.5.2, )"
+            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
               "version": "[3.1.18, )"
@@ -458,6 +470,9 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.SDK.csproj": {
+                "projectPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.SDK.csproj"
+              },
               "C:\\ProjectAssignment\\AdForm.Backend\\Datapersistence\\DBService\\AdForm.DBService\\AdForm.DBService.csproj": {
                 "projectPath": "C:\\ProjectAssignment\\AdForm.Backend\\Datapersistence\\DBService\\AdForm.DBService\\AdForm.DBService.csproj"
               },

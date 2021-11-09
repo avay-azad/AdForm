@@ -58,6 +58,12 @@ namespace AdFormAssignment.Business
             return _mapper.Map<ToDoItemResponseDto>(dbItem);
         }
 
+        public async Task<List<ToDoItemResponseDto>> GetAsync(long userId)
+        {
+            var toDoItems = _mapper.Map<List<ToDoItemResponseDto>>(await _toDoItemDataService.GetAllAsync(userId));
+            return toDoItems;
+        }
+
         public async Task UpdateAsync(long itemId, ToDoItemRequestDto updateToDoItemRequest)
         {
             var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, updateToDoItemRequest.UserId);
@@ -69,6 +75,17 @@ namespace AdFormAssignment.Business
         public async Task UpdateToDoItemPatchAsync(long itemId, long userId, JsonPatchDocument item)
         {
             await _toDoItemDataService.UpdateItemPatchAsync(itemId, userId, item);
+        }
+
+        public async Task<bool> AssignLabel(AssignLabelRequestDto assignLabelRequestDto)
+        {
+            var dbItem = await _toDoItemDataService.GetByIdAsync(assignLabelRequestDto.EntityId, assignLabelRequestDto.UserId);
+            if (dbItem == null)
+                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+
+            dbItem.LabelId = assignLabelRequestDto.LabelId;
+            await _toDoItemDataService.UpdateAsync(dbItem);
+            return true;
         }
     }
 }

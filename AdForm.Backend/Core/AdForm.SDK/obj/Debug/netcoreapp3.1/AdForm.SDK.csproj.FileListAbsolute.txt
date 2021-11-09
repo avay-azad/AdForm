@@ -9,8 +9,8 @@ C:\My Project\AdForm.Backend\Core\AdForm.SDK\obj\Debug\netcoreapp3.1\AdForm.SDK.
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\bin\Debug\netcoreapp3.1\AdForm.SDK.deps.json
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\bin\Debug\netcoreapp3.1\AdForm.SDK.dll
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\bin\Debug\netcoreapp3.1\AdForm.SDK.pdb
-C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\obj\Debug\netcoreapp3.1\AdForm.SDK.csprojAssemblyReference.cache
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\obj\Debug\netcoreapp3.1\AdForm.SDK.AssemblyInfoInputs.cache
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\obj\Debug\netcoreapp3.1\AdForm.SDK.AssemblyInfo.cs
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\obj\Debug\netcoreapp3.1\AdForm.SDK.dll
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\obj\Debug\netcoreapp3.1\AdForm.SDK.pdb
+C:\ProjectAssignment\AdForm.Backend\Core\AdForm.SDK\obj\Debug\netcoreapp3.1\AdForm.SDK.csprojAssemblyReference.cache

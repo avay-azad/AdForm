@@ -4,15 +4,12 @@ using AdFormAssignment.Business;
 using AdFormAssignment.DataService;
 using AdFormAssignment.Shared;
 using AutoMapper;
-using CorrelationId;
-using CorrelationId.DependencyInjection;
 using FluentValidation;
-using FluentValidation.AspNetCore;
+using HotChocolate;
+using HotChocolate.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,24 +36,26 @@ namespace AdFormAssignment.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers(p => p.RespectBrowserAcceptHeader = true).AddXmlDataContractSerializerFormatters()
+                .AddNewtonsoftJson();
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
-            //services.AddMvc(options =>
-            //{
-            //    options.EnableEndpointRouting = false;
-            //    options.Filters.Add(new CustomAuthorizeFilter(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()));
-            //});
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddHttpContextAccessor();
+            
+            ConfigureGraphQl(services);
             RegisterLogging(services);
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new MappingProfile());
             });
 
             IMapper mapper = mapperConfig.CreateMapper();
+
+            AddAppSettingConfig(services);
             services.AddSingleton(mapper);
             services.AddScoped<IJwtUtils, JwtUtils>();
             AddAdFormAssignmentDBServices(services);
@@ -65,27 +64,8 @@ namespace AdFormAssignment.Api
             RegisterSwagger(services, AppConstants.SwaggerVersion, AppConstants.SwaggerTitle,
                 AppConstants.SwaggerDescription, AppConstants.SwaggerDocumentName);
 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-           {
-               options.TokenValidationParameters = new TokenValidationParameters
-               {
-                   ValidateIssuerSigningKey = true,
-                   ValidateIssuer = false,
-                   ValidateAudience = false,
-                   // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-                   ClockSkew = TimeSpan.Zero,
-                   IssuerSigningKey =
-                       new SymmetricSecurityKey(Encoding.UTF8.GetBytes("JWT Token Secret"))
-               };
+            ConfigureAuthentication(services);
 
-               options.RequireHttpsMetadata = false;
-               options.SaveToken = true;
-           });
 
             services.AddApiVersioning(x =>
             {
@@ -95,6 +75,51 @@ namespace AdFormAssignment.Api
             });
 
 
+        }
+
+        private void AddAppSettingConfig(IServiceCollection services)
+        {
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+          
+        }
+        private void ConfigureAuthentication(IServiceCollection services)
+        {
+            string secret=  Configuration.GetSection("AppSettings")
+                            .GetSection("Secret").Value;
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
+                    ClockSkew = TimeSpan.Zero,
+                    IssuerSigningKey =
+                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
+                };
+
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+            });
+
+        }
+        private void ConfigureGraphQl(IServiceCollection services)
+        {
+            services.AddGraphQL(s => SchemaBuilder.New()
+               .AddServices(s)
+               .AddType<LabelType>()
+               .AddType<ItemsType>()
+               .AddType<ListsType>()
+               .AddQueryType<Query>()
+               .AddMutationType<Mutation>()
+               .AddAuthorizeDirectiveType()
+               .Create());
         }
 
         public virtual void RegisterSwagger(IServiceCollection services, string version, string title, string description, string documentName)
@@ -169,13 +194,14 @@ namespace AdFormAssignment.Api
             app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
             app.UseMiddleware<JwtMiddleware>();
             app.UseAuthentication();
-              app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            app.UseGraphQL().UsePlayground();
             app.UseOpenApi();
             app.UseSwaggerUi3();
 

@@ -361,6 +361,9 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
+              "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.SDK.csproj": {
+                "projectPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.SDK.csproj"
+              },
               "C:\\ProjectAssignment\\AdForm.Backend\\Datapersistence\\DBService\\AdForm.DBService\\AdForm.DBService.csproj": {
                 "projectPath": "C:\\ProjectAssignment\\AdForm.Backend\\Datapersistence\\DBService\\AdForm.DBService\\AdForm.DBService.csproj"
               },

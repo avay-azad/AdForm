@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AdFormAssignment.Business
@@ -12,5 +13,7 @@ namespace AdFormAssignment.Business
         Task UpdateAsync(long itemId, ToDoItemRequestDto updateToDoItemRequest);
         Task DeleteAsync(long itemId, long userId);
         Task UpdateToDoItemPatchAsync(long itemId, long userId, JsonPatchDocument item);
+        Task<List<ToDoItemResponseDto>> GetAsync(long userId);
+        Task<bool> AssignLabel(AssignLabelRequestDto assignLabelRequestDto);
     }
 }

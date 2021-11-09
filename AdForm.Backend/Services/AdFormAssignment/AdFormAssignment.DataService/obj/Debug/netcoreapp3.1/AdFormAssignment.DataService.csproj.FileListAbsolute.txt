@@ -24,3 +24,5 @@ C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.D
 C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.DataService\obj\Debug\netcoreapp3.1\AdFormAssignment.DataService.csproj.CopyComplete
 C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.DataService\obj\Debug\netcoreapp3.1\AdFormAssignment.DataService.dll
 C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.DataService\obj\Debug\netcoreapp3.1\AdFormAssignment.DataService.pdb
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.DataService\bin\Debug\netcoreapp3.1\AdForm.SDK.dll
+C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.DataService\bin\Debug\netcoreapp3.1\AdForm.SDK.pdb

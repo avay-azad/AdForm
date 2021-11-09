@@ -26,7 +26,7 @@ namespace AdFormAssignment.Business
 
         public async Task<ToDoListResponseDto> CreateAsync(ToDoListRequestDto createToDoListRequest)
         {
-            var dbList = await _toDoListDataService.GetByNameAsync(createToDoListRequest.ListName , createToDoListRequest.UserId);
+            var dbList = await _toDoListDataService.GetByNameAsync(createToDoListRequest.ListName, createToDoListRequest.UserId);
             if (dbList != null)
                 throw new ApiException(ErrorMessage.List_Exist, HttpStatusCode.Conflict, ApiExceptionType.ItemAlreadyExists);
             var item = await _toDoListDataService.AddAsync(_mapper.Map<ToDoLists>(createToDoListRequest));
@@ -55,10 +55,16 @@ namespace AdFormAssignment.Business
 
         public async Task<ToDoListResponseDto> GetAsync(long listId, long userId)
         {
-            var dbList = await _toDoListDataService.GetByIdAsync(listId,userId);
+            var dbList = await _toDoListDataService.GetByIdAsync(listId, userId);
             if (dbList == null)
                 throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
             return _mapper.Map<ToDoListResponseDto>(dbList);
+        }
+
+        public async Task<List<ToDoListResponseDto>> GetAsync(long userId)
+        {
+            var toDoLists = _mapper.Map<List<ToDoListResponseDto>>(await _toDoListDataService.GetAllAsync(userId));
+            return toDoLists;
         }
 
         public async Task UpdateAsync(long listId, ToDoListRequestDto updateToDoListRequest)
@@ -72,6 +78,16 @@ namespace AdFormAssignment.Business
         public async Task UpdateToDoListPatchAsync(long listId, long userId, JsonPatchDocument list)
         {
             await _toDoListDataService.UpdateToDoListPatchAsync(listId, userId, list);
+        }
+        public async Task<bool> AssignLabel(AssignLabelRequestDto assignLabelRequestDto)
+        {
+            var dbList = await _toDoListDataService.GetByIdAsync(assignLabelRequestDto.EntityId, assignLabelRequestDto.UserId);
+            if (dbList == null)
+                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+
+            dbList.LabelId = assignLabelRequestDto.LabelId;
+            await _toDoListDataService.UpdateAsync(dbList);
+            return true;
         }
     }
 }
