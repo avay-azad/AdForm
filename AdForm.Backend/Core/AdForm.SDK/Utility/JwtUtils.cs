@@ -24,7 +24,7 @@ namespace AdForm.SDK
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new[] { new Claim("id", userId.ToString()) }),
+                Subject = new ClaimsIdentity(new[] { new Claim("id", AesSymmetric.AesEncrypt(userId.ToString(), _appSettings.AesSymmetricKey)) }),
                 Expires = DateTime.UtcNow.AddMinutes(40),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
@@ -52,7 +52,7 @@ namespace AdForm.SDK
                 }, out SecurityToken validatedToken);
 
                 var jwtToken = (JwtSecurityToken)validatedToken;
-                var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
+                var userId = int.Parse(AesSymmetric.AesDecrypt(jwtToken.Claims.First(x => x.Type == "id").Value, _appSettings.AesSymmetricKey));
 
                 // return user id from JWT token if validation successful
                 return userId;

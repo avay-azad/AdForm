@@ -17,7 +17,7 @@
         public static readonly string List_Id_Null = "Please provied item Id";
 
         public static readonly string Label_Exist = "This label is allready exists";
-        public static readonly string ILabel_Not_Exist = "This label is not exists";
+        public static readonly string Label_Not_Exist = "This label is not exists";
         public static readonly string Label_Name_Empty = "Please provied label name";
         public static readonly string Label_Not_Exist_assign = "This label is not exists and can not assign any todolist or todoitem";
     }

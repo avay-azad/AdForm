@@ -44,7 +44,7 @@ namespace AdFormAssignment.Api
             });
 
             services.AddHttpContextAccessor();
-            
+
             ConfigureGraphQl(services);
             RegisterLogging(services);
 
@@ -73,18 +73,16 @@ namespace AdFormAssignment.Api
                 x.AssumeDefaultVersionWhenUnspecified = true;
                 x.ReportApiVersions = true;
             });
-
-
         }
 
         private void AddAppSettingConfig(IServiceCollection services)
         {
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-          
+
         }
         private void ConfigureAuthentication(IServiceCollection services)
         {
-            string secret=  Configuration.GetSection("AppSettings")
+            string secret = Configuration.GetSection("AppSettings")
                             .GetSection("Secret").Value;
             services.AddAuthentication(options =>
             {

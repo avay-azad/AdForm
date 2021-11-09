@@ -96,7 +96,7 @@ namespace AdFormAssignment.Api.Controllers.V1
         /// <param name="id"></param>
         /// <param name="toDoListAppService"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id}/AssignLabelToList")]
         public async Task<IActionResult> AssignLabelToList([FromBody] AssignLabelRequestDto request, [FromRoute] long id
             , [FromServices] IToDoListAppService toDoListAppService)
         {
@@ -120,7 +120,7 @@ namespace AdFormAssignment.Api.Controllers.V1
         /// <param name="id"></param>
         /// <param name="toDoItemAppService"></param>
         /// <returns></returns>
-        [HttpPut("{id}")]
+        [HttpPut("{id}/AssignLabelToItem")]
         public async Task<IActionResult> AssignLabelToItem([FromBody] AssignLabelRequestDto request, [FromRoute] long id
            , [FromServices] IToDoItemAppService toDoItemAppService)
         {

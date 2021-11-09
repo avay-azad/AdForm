@@ -23,29 +23,7 @@
     public enum ApiExceptionType
     {
         ItemAlreadyExists,
-        UserDoesNotExist,
-        EmailNotVerified,
-        UserDetailsDoesNotExist,
-        ValidationError,
-        ThirdPartyProviderError,
-        TopUpTransactionFailed,
-        MasterCardError,
-        CardError,
-        SystemError,
-        MaxInvalidOtpAttemptsExceeded,
-        MaxResendOtpAttemptsExceeded,
-        AccountLocked,
-        AccountSuspended,
-        SecurityAnswersMaxInvalidAttemptsExceeded,
-        OtpExpired,
-        SecurityQuestionNotConfigured,
-        InvalidOperation,
-        ApiError,
-        SendGridError,
-        OnBoardingNotCompleted,
-        IncorrectOTP,
-        RequestNull,
-        SmartLoginAlreadyConfigured,
+        ItemNotfound,
         UnsupportedAppVersion
     }
 

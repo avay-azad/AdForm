@@ -36,7 +36,7 @@ namespace AdFormAssignment.Business
         {
             var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, userId);
             if (dbItem == null)
-                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
             await _toDoItemDataService.DeleteAsync(dbItem);
         }
 
@@ -68,7 +68,7 @@ namespace AdFormAssignment.Business
         {
             var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, updateToDoItemRequest.UserId);
             if (dbItem == null)
-                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
             await _toDoItemDataService.UpdateAsync(_mapper.Map<ToDoItems>(updateToDoItemRequest));
         }
 
@@ -81,7 +81,7 @@ namespace AdFormAssignment.Business
         {
             var dbItem = await _toDoItemDataService.GetByIdAsync(assignLabelRequestDto.EntityId, assignLabelRequestDto.UserId);
             if (dbItem == null)
-                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
 
             dbItem.LabelId = assignLabelRequestDto.LabelId;
             await _toDoItemDataService.UpdateAsync(dbItem);

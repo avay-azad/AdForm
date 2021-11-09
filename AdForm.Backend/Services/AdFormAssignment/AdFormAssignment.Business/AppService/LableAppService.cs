@@ -35,7 +35,7 @@ namespace AdFormAssignment.Business
         {
             var dbLabel = await _labelDataService.GetByIdAsync(labelId);
             if (dbLabel == null)
-                throw new ApiException(ErrorMessage.ILabel_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+                throw new ApiException(ErrorMessage.Label_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
             await _labelDataService.DeleteAsync(dbLabel);
         }
 
@@ -43,7 +43,7 @@ namespace AdFormAssignment.Business
         {
             var labels = _mapper.Map<List<LabelResponseDto>>(await _labelDataService.GetAllAsync());
             if(labels.Count ==0)
-                throw new ApiException(ErrorMessage.ILabel_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
+                throw new ApiException(ErrorMessage.Label_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
             return labels;
         }
 
