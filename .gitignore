@@ -5,12 +5,16 @@
 /AdForm.Backend/.vs/AdForm.Backend/v16/Server/sqlite3/db.lock
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Api/AdFormLog
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Api/obj
+/AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Api/obj/Debug/netcoreapp3.1
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Api/bin/Debug/netcoreapp3.1
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Business/bin/Debug/netcoreapp3.1
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Business/obj
+/AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Business/obj/Debug/netcoreapp3.1
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.DataService/bin/Debug/netcoreapp3.1
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.DataService/obj
+/AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.DataService/obj/Debug/netcoreapp3.1
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Shared/bin/Debug/netcoreapp3.1
+/AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Shared/obj/Debug/netcoreapp3.1
 /AdForm.Backend/Services/AdFormAssignment/AdFormAssignment.Shared/obj
 /AdForm.Backend/Core/AdForm.SDK/bin/Debug/netcoreapp3.1
 /AdForm.Backend/Core/AdForm.SDK/obj/Debug/netcoreapp3.1

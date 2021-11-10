@@ -379,6 +379,4 @@ C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.A
 C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api\bin\Debug\netcoreapp3.1\HotChocolate.AspNetCore.HttpPost.dll
 C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api\bin\Debug\netcoreapp3.1\HotChocolate.AspNetCore.Subscriptions.dll
 C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api\bin\Debug\netcoreapp3.1\HotChocolate.Types.Filters.dll
-C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api\obj\Debug\netcoreapp3.1\AdFormAssignment.Api.MvcApplicationPartsAssemblyInfo.cs
-C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api\obj\Debug\netcoreapp3.1\AdFormAssignment.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\ProjectAssignment\AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api\bin\Debug\netcoreapp3.1\appsettings.Production.json
