@@ -11,6 +11,7 @@ It also logs each and every request/response or error if any.
 
 Added support for GraphQL and unit test cases.
 
+
 How to run application
 
 Step 1: Clone repo:
@@ -19,7 +20,23 @@ git clone https://github.com/avay-azad/AdForm.git
 Step 2: Go the folder "AdForm.Backend" and run
 “dotnet restore”
 
-Step 3: Go the folder “AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api” and run 
+setup Database 
+
+Step 3 : based on enviornment Change connection string in file appsettings.Development or appsettings.Production
+like : "ConnectionStrings": {
+    "AdFormDataContext": "server=AVAYAZAD-01; database=AdFormDB_Development;Trusted_Connection=True;"
+  }
+  
+Step 4: Go the folder "AdForm.Backend\Datapersistence\DBService\AdForm.DBService" and run following command
+4.1: dotnet tool install --global dotnet-ef
+4.2 : dotnet tool update --global dotnet-ef
+4.3 :dotnet add package Microsoft.EntityFrameworkCore.Design
+4.4: dotnet ef
+
+Step 5: Go the folder “AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api” and run 
+ dotnet ef database update -- --environment Development
+
+Step 6: Go the folder “AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api” and run 
 “dotnet run”
 
 Navigate to http://localhost:5000/ in a browser to play with the Swagger UI.
