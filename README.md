@@ -13,6 +13,18 @@ Added support for GraphQL and unit test cases.
 
 
 How to run application
+Approch 1 : Through visual studio
+Step 1: Clone repo:
+git clone https://github.com/avay-azad/AdForm.git
+
+Step 2: AdForm.Backend solution in visual studio
+Step 3 : Open package Manage consloe and select project AdForm.DBService and run command
+ Update-Database –verbose
+
+Step 4 : setup statup project AdFormAssignment.Api andrun application
+
+
+Approch 2 : Through .Net Cli command
 
 Step 1: Clone repo:
 git clone https://github.com/avay-azad/AdForm.git
