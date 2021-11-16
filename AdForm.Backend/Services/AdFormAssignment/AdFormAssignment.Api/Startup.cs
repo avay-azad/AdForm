@@ -171,7 +171,7 @@ namespace AdFormAssignment.Api
             services.AddScoped<ILabelDataService, LabelDataService>();
         }
 
-        public virtual void RegisterLogging(IServiceCollection services)
+        private void RegisterLogging(IServiceCollection services)
         {
             var serilog = new SerilogLogging();
             serilog.Loging(services, Configuration);
