@@ -2727,11 +2727,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.Core.csproj",
+      "projectUniqueName": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.Core\\AdForm.Core.csproj",
       "projectName": "AdForm.Core",
-      "projectPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.Core.csproj",
+      "projectPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.Core\\AdForm.Core.csproj",
       "packagesPath": "C:\\Users\\avayazad.NAGARRO\\.nuget\\packages\\",
-      "outputPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\obj\\",
+      "outputPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
