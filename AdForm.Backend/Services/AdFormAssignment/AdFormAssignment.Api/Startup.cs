@@ -16,9 +16,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using NSwag;
-using NSwag.Generation.Processors.Security;
+using Microsoft.OpenApi.Models;
 using System;
+using System.Linq;
 using System.Text;
 
 namespace AdFormAssignment.Api
@@ -60,7 +60,7 @@ namespace AdFormAssignment.Api
             services.AddScoped<IJwtUtils, JwtUtils>();
             AddAdFormAssignmentDBServices(services);
             AddAdFormValidator(services);
-            AdddAdFormServices(services);
+            AddAdFormServices(services);
             RegisterSwagger(services, AppConstants.SwaggerVersion, AppConstants.SwaggerTitle,
                 AppConstants.SwaggerDescription, AppConstants.SwaggerDocumentName);
 
@@ -75,11 +75,44 @@ namespace AdFormAssignment.Api
             });
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            using (IServiceScope serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<HomeworkDBContext>();
+                context.Database.Migrate();
+            }
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            app.UseMiddleware(typeof(RequestResponseLoggingMiddleware));
+            app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
+            app.UseMiddleware<JwtMiddleware>();
+            app.UseAuthentication();
+            app.UseHttpsRedirection();
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+            app.UseGraphQL().UsePlayground();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Adform Assignment API");
+                c.RoutePrefix = string.Empty;
+            });
+
+        }
+
         private void AddAppSettingConfig(IServiceCollection services)
         {
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-
         }
+
         private void ConfigureAuthentication(IServiceCollection services)
         {
             string secret = Configuration.GetSection("AppSettings")
@@ -107,6 +140,7 @@ namespace AdFormAssignment.Api
             });
 
         }
+
         private void ConfigureGraphQl(IServiceCollection services)
         {
             services.AddGraphQL(s => SchemaBuilder.New()
@@ -122,23 +156,34 @@ namespace AdFormAssignment.Api
 
         public virtual void RegisterSwagger(IServiceCollection services, string version, string title, string description, string documentName)
         {
-            services.AddSwaggerDocument(options =>
+            services.AddSwaggerGen(p =>
             {
-                options.Version = version;
-                options.Title = title;
-                options.Description = description;
-                options.DocumentName = documentName;
-                options.GenerateEnumMappingDescription = true;
-                options.RequireParametersWithoutDefault = true;
-                options.OperationProcessors.Add(new OperationSecurityScopeProcessor(HttpRequestHeaders.Authorization));
-                options.DocumentProcessors.Add(new SecurityDefinitionAppender(HttpRequestHeaders.Authorization, new OpenApiSecurityScheme()
+                p.SwaggerDoc(version, new Microsoft.OpenApi.Models.OpenApiInfo { Title = title, Version = version });
+                p.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+
+                p.AddSecurityDefinition(GlobalConstants.Bearer , new OpenApiSecurityScheme
                 {
-                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    Description = description,
                     Name = HttpRequestHeaders.Authorization,
-                    In = OpenApiSecurityApiKeyLocation.Header,
-                    Description = GlobalConstants.BearerToken
-                }));
-                options.OperationProcessors.Add(new SampleHeaderOperationProcessor());
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = GlobalConstants.Bearer
+                });
+                p.OperationFilter<AddRequiredHeaderParameter>();
+                p.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = GlobalConstants.Bearer
+                            }
+                        },
+                        Array.Empty<string>()
+                    }
+                });
             });
         }
 
@@ -159,7 +204,7 @@ namespace AdFormAssignment.Api
             services.AddTransient<IValidator<LabelRequestDto>, CreateLabelRequestValidator>();
         }
 
-        private void AdddAdFormServices(IServiceCollection services)
+        private void AddAdFormServices(IServiceCollection services)
         {
             services.AddScoped<IUserAppService, UserAppService>();
             services.AddScoped<IUserDataService, UserDataService>();
@@ -176,33 +221,6 @@ namespace AdFormAssignment.Api
             var serilog = new SerilogLogging();
             serilog.Loging(services, Configuration);
         }
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<HomeworkDBContext>();
-                context.Database.EnsureCreated();
-            }
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            app.UseMiddleware(typeof(RequestResponseLoggingMiddleware));
-            app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
-            app.UseMiddleware<JwtMiddleware>();
-            app.UseAuthentication();
-            app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-            app.UseGraphQL().UsePlayground();
-            app.UseOpenApi();
-            app.UseSwaggerUi3();
 
-        }
     }
 }

@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.SDK.csproj": {}
+    "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.Core.csproj": {}
   },
   "projects": {
-    "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.SDK.csproj": {
+    "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.SDK.csproj",
-        "projectName": "AdForm.SDK",
-        "projectPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.SDK.csproj",
+        "projectUniqueName": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.Core.csproj",
+        "projectName": "AdForm.Core",
+        "projectPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\AdForm.Core.csproj",
         "packagesPath": "C:\\Users\\avayazad.NAGARRO\\.nuget\\packages\\",
         "outputPath": "C:\\ProjectAssignment\\AdForm.Backend\\Core\\AdForm.SDK\\obj\\",
         "projectStyle": "PackageReference",

@@ -25,10 +25,6 @@ namespace AdForm.SDK
         {
             try
             {
-                //if (HttpMethods.IsPost(context.Request.Method))
-                //{
-                //    HandleHeaderAsync(context);
-                //}
                 await next(context);
             }
             catch (Exception ex)
@@ -44,7 +40,6 @@ namespace AdForm.SDK
             string errorType = string.Empty;
             string businessCode = string.Empty;
             var listFieldErrors = new List<ModelErrorResponse>();
-           // string locale = context.GetLanguage();
             if (exception is AdFormException)
             {
                 errorMessage = exception.Message;
@@ -89,16 +84,6 @@ namespace AdForm.SDK
             context.Response.ContentType = GlobalConstants.ContentType;
             context.Response.StatusCode = Convert.ToInt32(statusCode);
             return context.Response.WriteAsync(result);
-        }
-
-        private void HandleHeaderAsync(HttpContext context)
-        {
-            if (!context.Request.Headers.ContainsKey(HttpRequestHeaders.UserAgent.ToString()) ||
-                !context.Request.Headers.ContainsKey(HttpRequestHeaders.DeviceId.ToString()))
-            {
-                throw new HeaderException(ApiErrorMessage.Global_Header_Validation,
-                    HttpStatusCode.ExpectationFailed, HeaderExceptionType.HeaderMissing);
-            }
         }
     }
 }

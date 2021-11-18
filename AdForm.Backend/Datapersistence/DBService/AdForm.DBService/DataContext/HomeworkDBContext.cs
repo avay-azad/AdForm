@@ -1,5 +1,4 @@
-﻿using AdForm.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace AdForm.DBService
 {

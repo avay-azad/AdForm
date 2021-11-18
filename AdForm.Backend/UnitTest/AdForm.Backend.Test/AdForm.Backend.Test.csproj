@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -15,13 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.Api\AdFormAssignment.Api.csproj" />
-    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.Business\AdFormAssignment.Business.csproj" />
-    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.DataService\AdFormAssignment.DataService.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ControllersTests\" />
+    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.Api\ToDoApp.Api.csproj" />
+    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.Business\ToDoApp.Business.csproj" />
+    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.DataService\ToDoApp.DataService.csproj" />
   </ItemGroup>
 
 </Project>

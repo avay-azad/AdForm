@@ -1,5 +1,4 @@
 ﻿using AdForm.DBService;
-using AdForm.Entities;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;

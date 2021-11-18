@@ -17,8 +17,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Model\Entities\Adform.Entities\AdForm.Entities.csproj" />
-  </ItemGroup>
-
 </Project>

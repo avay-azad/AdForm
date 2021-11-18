@@ -1,4 +1,4 @@
-﻿using AdForm.Entities;
+﻿using AdForm.DBService;
 using AutoMapper;
 
 namespace AdFormAssignment.Business

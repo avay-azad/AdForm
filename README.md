@@ -3,7 +3,8 @@ Name: ToDo App Backend API (.Net Core)
 
  
 
-Description
+Description : 
+
 A rest api project to do CRUD operations for todoitems or lists via HTTP Verbs (GET, POST, PUT, DELETE, PATCH).
 
 It includes functionality to create labels which can be assigned to items or lists. It also includes  authorization via JWT Token. The only thing which must be taken care of is connection string in appsettings.json.
@@ -19,7 +20,7 @@ git clone https://github.com/avay-azad/AdForm.git
 
 Step 2: AdForm.Backend solution in visual studio
 Step 3 : Open package Manage consloe and select project AdForm.DBService and run command
- Update-Database –verbose
+ Update-Database
 
 Step 4 : setup statup project AdFormAssignment.Api andrun application
 

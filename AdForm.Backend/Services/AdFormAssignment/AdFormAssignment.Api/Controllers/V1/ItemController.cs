@@ -2,10 +2,8 @@
 using AdFormAssignment.Business;
 using FluentValidation;
 using FluentValidation.Results;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Net;
@@ -19,7 +17,6 @@ namespace AdFormAssignment.Api.Controllers.V1
     [ApiController]
     public class ItemController : ControllerBase
     {
-        private readonly ILogger<ItemController> _logger;
         private readonly IToDoItemAppService _toDoItemAppService;
 
         /// <summary>
@@ -27,9 +24,8 @@ namespace AdFormAssignment.Api.Controllers.V1
         /// </summary>
         /// <param name="logger"></param>
         /// <param name="toDoItemAppService"></param>
-        public ItemController(ILogger<ItemController> logger, IToDoItemAppService toDoItemAppService)
+        public ItemController(IToDoItemAppService toDoItemAppService)
         {
-            _logger = logger;
             _toDoItemAppService = toDoItemAppService;
         }
 

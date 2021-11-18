@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace AdForm.Entities
+namespace AdForm.DBService
 {
     public class Labels : BaseEntity
     {
