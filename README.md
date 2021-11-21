@@ -22,7 +22,7 @@ Step 2: AdForm.Backend solution in visual studio
 Step 3 : Open package Manage consloe and select project AdForm.DBService and run command
  Update-Database
 
-Step 4 : setup statup project AdFormAssignment.Api andrun application
+Step 4 : setup statup project ToDoApp andrun application
 
 
 Approch 2 : Through .Net Cli command
@@ -46,10 +46,10 @@ Step 4: Go the folder "AdForm.Backend\Datapersistence\DBService\AdForm.DBService
 4.3 :dotnet add package Microsoft.EntityFrameworkCore.Design
 4.4: dotnet ef
 
-Step 5: Go the folder “AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api” and run 
+Step 5: Go the folder “AdForm.Backend\Services\AdFormAssignment\ToDoApp” and run 
  dotnet ef database update -- --environment Development
 
-Step 6: Go the folder “AdForm.Backend\Services\AdFormAssignment\AdFormAssignment.Api” and run 
+Step 6: Go the folder “AdForm.Backend\Services\AdFormAssignment\ToDoApp” and run 
 “dotnet run”
 
 Navigate to http://localhost:5000/ in a browser to play with the Swagger UI.

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public class SerilogLogging
     {

@@ -1,4 +1,4 @@
-﻿namespace AdForm.SDK
+﻿namespace AdForm.Core
 {
     public class GlobalConstants
     {

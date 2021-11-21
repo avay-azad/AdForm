@@ -8,7 +8,7 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public class ExceptionHandlingMiddleware
     {

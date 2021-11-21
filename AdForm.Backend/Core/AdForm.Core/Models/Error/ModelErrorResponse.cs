@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public class ModelErrorResponse
     {

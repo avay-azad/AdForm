@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public class APIResponse<T>
     {

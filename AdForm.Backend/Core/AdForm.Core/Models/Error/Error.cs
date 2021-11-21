@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public class Error
     {

@@ -2,7 +2,7 @@
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     /// <summary>
     /// Add required header parameters.

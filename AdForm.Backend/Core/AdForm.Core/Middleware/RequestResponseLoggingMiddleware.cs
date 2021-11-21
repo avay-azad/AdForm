@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     /// <summary>
     /// Middleware for logging request and response.

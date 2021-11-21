@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     /// <summary>
     /// Middleware for Jwt Token verification.

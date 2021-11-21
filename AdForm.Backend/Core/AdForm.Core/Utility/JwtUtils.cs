@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public class JwtUtils :IJwtUtils
     {

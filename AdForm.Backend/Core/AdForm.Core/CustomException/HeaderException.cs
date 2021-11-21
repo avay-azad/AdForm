@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Runtime.Serialization;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     [Serializable]
     public class HeaderException : AdFormException

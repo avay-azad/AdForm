@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.Json;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public class Utility
     {

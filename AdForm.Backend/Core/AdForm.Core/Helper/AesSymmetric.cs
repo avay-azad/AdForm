@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public static class AesSymmetric
     {

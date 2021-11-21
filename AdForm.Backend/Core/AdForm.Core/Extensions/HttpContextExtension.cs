@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Primitives;
 using System.Linq;
 
-namespace AdForm.SDK
+namespace AdForm.Core
 {
     public static class HttpContextExtension
     {

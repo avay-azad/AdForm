@@ -14,10 +14,4 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.Api\ToDoApp.Api.csproj" />
-    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.Business\ToDoApp.Business.csproj" />
-    <ProjectReference Include="..\..\Services\AdFormAssignment\AdFormAssignment.DataService\ToDoApp.DataService.csproj" />
-  </ItemGroup>
-
 </Project>
