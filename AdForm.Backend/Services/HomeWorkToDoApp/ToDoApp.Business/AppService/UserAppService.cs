@@ -37,7 +37,7 @@ namespace ToDoApp.Business
             if (user == null)
                 throw new AuthenticationException(ErrorMessage.User_Invalid_Login, HttpStatusCode.Unauthorized, AuthenticationExceptionType.Unauthorized);
             else if (AesSymmetric.AesDecrypt(user.Password, _appSettings.AesSymmetricKey) == loginRequestDto.Password)
-                return user.Id;
+                return user.UserId;
             else
                 throw new AuthenticationException(ErrorMessage.User_Invalid_Login, HttpStatusCode.Unauthorized, AuthenticationExceptionType.Unauthorized);
         }

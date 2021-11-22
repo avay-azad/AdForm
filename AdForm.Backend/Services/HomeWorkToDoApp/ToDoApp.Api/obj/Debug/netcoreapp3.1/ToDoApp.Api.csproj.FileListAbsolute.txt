@@ -1,6 +1,4 @@
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.csprojAssemblyReference.cache
-C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.MvcApplicationPartsAssemblyInfo.cs
-C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.MvcApplicationPartsAssemblyInfo.cache
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.AssemblyInfoInputs.cache
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.AssemblyInfo.cs
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\bin\Debug\netcoreapp3.1\appsettings.Development.json
@@ -194,3 +192,6 @@ C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Deb
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.dll
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.xml
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.pdb
+C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer.dll
+C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\obj\Debug\netcoreapp3.1\ToDoApp.Api.MvcApplicationPartsAssemblyInfo.cache

@@ -8,8 +8,8 @@ namespace ToDoApp.Business
     public interface ILableAppService
     {
         Task<LabelResponseDto> CreateAsync(LabelRequestDto labelRequestDto);
-        Task DeleteAsync(long labelId);
-        Task<List<LabelResponseDto>> GetAsync();
-        Task<LabelResponseDto> GetAsync(long labelId);
+        Task DeleteAsync(long labelId, long userId);
+        Task<List<LabelResponseDto>> GetAsync(long userId);
+        Task<LabelResponseDto> GetAsync(long labelId, long userId);
     }
 }

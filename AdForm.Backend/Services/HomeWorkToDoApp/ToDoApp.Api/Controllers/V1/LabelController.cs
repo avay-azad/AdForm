@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace ToDoApp.Api.Controllers.V1
 {
@@ -32,29 +33,43 @@ namespace ToDoApp.Api.Controllers.V1
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var labels = await _lableAppService.GetAsync();
+            var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
+            var labels = await _lableAppService.GetAsync(userId);
 
             return Ok(new APIResponse<List<LabelResponseDto>> { IsSucess = true, Result = labels });
         }
 
         /// <summary>
-        /// Get label by Id
+        /// Get specific label record.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Returns Action result" type based on Success/Failure.</returns>
+        /// <response code="200"> Gets specified label.</response>
+        /// <response code="404"> A label with the specified label ID was not found.</response>
+        /// <response code="401"> Authorization information is missing or invalid.</response>
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLabel([FromRoute] long id)
         {
-            var label = await _lableAppService.GetAsync(id);
+            var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
+            var label = await _lableAppService.GetAsync(id, userId);
             return Ok(new APIResponse<LabelResponseDto> { IsSucess = true, Result = label });
         }
 
         /// <summary>
-        /// Craete label
+        /// Create Label record.
         /// </summary>
         /// <param name="request"></param>
         /// <param name="validator"></param>
-        /// <returns></returns>
+        /// <returns>Returns Action result type based on Success/Failure.</returns>
+        /// <response code="201"> Creates Label and returns location where it is created.</response>
+        /// <response code="400"> Invalid request format.</response>
+        /// <response code="401"> Authorization information is missing or invalid.</response>
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] LabelRequestDto request, [FromServices] IValidator<LabelRequestDto> validator)
         {
@@ -64,73 +79,31 @@ namespace ToDoApp.Api.Controllers.V1
                     ApiExceptionType.ValidationError, validationResult.Errors);
 
             var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
-
+            request.UserId = userId;
             var label = await _lableAppService.CreateAsync(request);
 
-            return CreatedAtAction(nameof(GetLabel), new { label.Id }, request);
+            return CreatedAtAction(nameof(GetLabel), new { id = label.LabelId }, request);
 
         }
 
         /// <summary>
-        /// Delete label
+        /// Delete specific label record.
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>Returns Action result type based on Success/Failure.</returns>
+        /// <response code="200"> Deletes specified label record.</response>
+        /// <response code="404"> A label with the specified label ID was not found.</response>
+        /// <response code="401"> Authorization information is missing or invalid.</response>
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] long id)
         {
-
-            await _lableAppService.DeleteAsync(id);
+            var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
+            await _lableAppService.DeleteAsync(id, userId);
 
             return Ok(new APIResponse<object> { IsSucess = true, Result = null });
-        }
-
-        /// <summary>
-        /// Assign label to list
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="id"></param>
-        /// <param name="toDoListAppService"></param>
-        /// <returns></returns>
-        [HttpPut("{id}/AssignLabelToList")]
-        public async Task<IActionResult> AssignLabelToList([FromBody] AssignLabelRequestDto request, [FromRoute] long id
-            , [FromServices] IToDoListAppService toDoListAppService)
-        {
-            var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
-
-            var label = _lableAppService.GetAsync(id);
-            if (label == null)
-                throw new ApiException(ErrorMessage.Label_Not_Exist_assign, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
-
-            request.LabelId = id;
-            request.UserId = userId;
-
-            bool isAssigned = await toDoListAppService.AssignLabel(request);
-            return Ok(new APIResponse<object> { IsSucess = isAssigned, Result = null });
-        }
-
-        /// <summary>
-        /// Assign label to item
-        /// </summary>
-        /// <param name="request"></param>
-        /// <param name="id"></param>
-        /// <param name="toDoItemAppService"></param>
-        /// <returns></returns>
-        [HttpPut("{id}/AssignLabelToItem")]
-        public async Task<IActionResult> AssignLabelToItem([FromBody] AssignLabelRequestDto request, [FromRoute] long id
-           , [FromServices] IToDoItemAppService toDoItemAppService)
-        {
-            var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
-
-            var label = _lableAppService.GetAsync(id);
-            if (label == null)
-                throw new ApiException(ErrorMessage.Label_Not_Exist_assign, HttpStatusCode.NotFound, ApiExceptionType.ItemAlreadyExists);
-
-            request.LabelId = id;
-            request.UserId = userId;
-
-            bool isAssigned = await toDoItemAppService.AssignLabel(request);
-            return Ok(new APIResponse<object> { IsSucess = isAssigned, Result = null });
         }
     }
 }

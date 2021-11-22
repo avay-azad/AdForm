@@ -3,12 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace ToDoApp.Business
 {
-    public class ToDoItemRequestDto
+    public class ToDoItemRequestDto 
     {
         public string ItemName { get; set; }
-
         [IgnoreDataMember, JsonIgnore]
         public long UserId { get; set; }
+        public long ToDoListId { get; set; }
 
     }
 }

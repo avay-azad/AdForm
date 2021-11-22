@@ -77,14 +77,22 @@ namespace ToDoApp.Business
         {
             await _toDoListDataService.UpdateToDoListPatchAsync(listId, userId, list);
         }
-        public async Task<bool> AssignLabel(AssignLabelRequestDto assignLabelRequestDto)
+        public async Task<bool> AssignLabel(long toDoListId, AssignLabelRequestDto assignLabelRequestDto, ILableAppService lableAppService)
         {
-            var dbList = await _toDoListDataService.GetByIdAsync(assignLabelRequestDto.EntityId, assignLabelRequestDto.UserId);
-            if (dbList == null)
-                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+            List<LabelToDoList> lstLabelToDoList = new List<LabelToDoList>();
+            if (assignLabelRequestDto.LabelId.Count > 0)
+            {
+                for(int i = 0; i <= assignLabelRequestDto.LabelId.Count-1; i++)
+                {
 
-            dbList.LabelId = assignLabelRequestDto.LabelId;
-            await _toDoListDataService.UpdateAsync(dbList);
+                    lstLabelToDoList.Add(new LabelToDoList { LabelId = assignLabelRequestDto.LabelId[i], ToDoListId = toDoListId });
+                }
+            }
+
+            LabelToDoList[] labelToDoLists = lstLabelToDoList.ToArray<LabelToDoList>();
+
+             await _toDoListDataService.AssignLabel(labelToDoLists);
+
             return true;
         }
     }

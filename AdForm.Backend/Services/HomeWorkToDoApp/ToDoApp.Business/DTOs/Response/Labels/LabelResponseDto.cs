@@ -4,7 +4,7 @@ namespace ToDoApp.Business
 {
     public class LabelResponseDto : LabelRequestDto
     {
-        public long Id { get; set; }
+        public long LabelId { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
     }

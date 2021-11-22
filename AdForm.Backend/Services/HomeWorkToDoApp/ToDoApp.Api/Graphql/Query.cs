@@ -42,8 +42,8 @@ namespace ToDoApp.Api
         [UseFiltering]
         public async Task<IQueryable<LabelResponseDto>> Labels([Service] IHttpContextAccessor contextAccessor)
         {
-
-            var labels = (await _lableAppService.GetAsync()).AsQueryable();
+            var userId = Convert.ToInt64(contextAccessor.HttpContext.Items["UserId"]);
+            var labels = (await _lableAppService.GetAsync(userId)).AsQueryable();
             return labels;
         }
 

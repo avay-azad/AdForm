@@ -5,7 +5,7 @@ namespace ToDoApp.Business
 {
     public class GetListRequestDto
     {
-        public long Id { get; set; }
+        public long ToDoListId { get; set; }
         [IgnoreDataMember, JsonIgnore]
         public long UserId { get; set; }
     }

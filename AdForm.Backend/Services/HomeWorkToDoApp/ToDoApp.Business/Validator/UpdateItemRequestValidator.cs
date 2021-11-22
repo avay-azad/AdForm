@@ -11,7 +11,7 @@ namespace ToDoApp.Business
             RuleFor(item => item.ItemName)
                .NotEmpty().WithMessage(ErrorMessage.Item_Name_Empty).WithErrorCode(HttpStatusCode.BadRequest.ToString());
 
-            RuleFor(item => item.ItemId)
+            RuleFor(item => item.ToDoItemId)
               .NotNull().WithMessage(ErrorMessage.Item_Id_Null).WithErrorCode(HttpStatusCode.BadRequest.ToString());
 
 

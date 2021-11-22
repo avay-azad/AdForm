@@ -10,7 +10,7 @@ namespace ToDoApp.Api
     {
         protected override void Configure(IObjectTypeDescriptor<ToDoListResponseDto> descriptor)
         {
-            descriptor.Field(a => a.Id).Type<IdType>();
+            descriptor.Field(a => a.ToDoListId).Type<IdType>();
             descriptor.Field(a => a.Name).Type<StringType>();
             descriptor.Field(a => a.CreatedDate).Type<DateTimeType>();
             descriptor.Field(a => a.UpdatedDate).Type<DateTimeType>();

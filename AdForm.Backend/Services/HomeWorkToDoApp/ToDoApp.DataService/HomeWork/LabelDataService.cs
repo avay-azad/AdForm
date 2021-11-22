@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace ToDoApp.DataService
 {
@@ -27,20 +28,20 @@ namespace ToDoApp.DataService
             return label;
         }
 
-        public async Task<List<Labels>> GetAllAsync()
+        public async Task<List<Labels>> GetAllAsync(long userId)
         {
-            return await _dbContext.Labels.ToListAsync();
+            return await _dbContext.Labels.Where(i => i.UserId == userId).ToListAsync();
         }
 
-        public async Task<Labels> GetByIdAsync(long labelId)
+        public async Task<Labels> GetByIdAsync(long labelId, long userId)
         {
-            var result = await _dbContext.Labels.FirstOrDefaultAsync(i => i.Id == labelId);
+            var result = await _dbContext.Labels.FirstOrDefaultAsync(i => i.LabelId == labelId && i.UserId == userId);
             return result;
         }
 
-        public async Task<Labels> GetByNameAsync(string labelName)
+        public async Task<Labels> GetByNameAsync(string labelName, long userId)
         {
-            var result = await _dbContext.Labels.FirstOrDefaultAsync(i => i.Name == labelName);
+            var result = await _dbContext.Labels.FirstOrDefaultAsync(i => i.Name == labelName && i.UserId == userId);
             return result;
         }
     }

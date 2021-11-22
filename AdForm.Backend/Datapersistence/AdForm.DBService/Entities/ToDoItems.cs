@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdForm.DBService
@@ -7,13 +8,15 @@ namespace AdForm.DBService
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long Id { get; set; }
+        public long ToDoItemId { get; set; }
+        [Required]
         public string Name { get; set; }
         public long UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual Users Users { get; set; }
-        public long? LabelId { get; set; }
-        [ForeignKey("LabelId")]
-        public virtual Labels Labels { get; set; }
+        public long ToDoListId { get; set; }
+        [ForeignKey("ToDoListId")]
+        public virtual ToDoLists ToDoLists { get; set; }
+        public IList<LabelToDoItem> LabelToDoItems { get; set; }
     }
 }

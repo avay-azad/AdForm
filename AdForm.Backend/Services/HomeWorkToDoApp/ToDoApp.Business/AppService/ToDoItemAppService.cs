@@ -14,11 +14,13 @@ namespace ToDoApp.Business
     public class ToDoItemAppService : IToDoItemAppService
     {
         private readonly IToDoItemDataService _toDoItemDataService;
+        private readonly IToDoListDataService _toDoListDataService;
         private readonly IMapper _mapper;
 
-        public ToDoItemAppService(IToDoItemDataService toDoItemDataService, IMapper mapper)
+        public ToDoItemAppService(IToDoItemDataService toDoItemDataService, IToDoListDataService toDoListDataService, IMapper mapper)
         {
             _toDoItemDataService = toDoItemDataService;
+            _toDoListDataService = toDoListDataService;
             _mapper = mapper;
         }
         public async Task<ToDoItemResponseDto> CreateAsync(ToDoItemRequestDto createToDoItemRequest)
@@ -26,6 +28,12 @@ namespace ToDoApp.Business
             var dbItem = await _toDoItemDataService.GetByNameAsync(createToDoItemRequest.ItemName, createToDoItemRequest.UserId);
             if (dbItem != null)
                 throw new ApiException(ErrorMessage.Item_Exist, HttpStatusCode.Conflict, ApiExceptionType.ItemAlreadyExists);
+
+            var toDoList = await _toDoListDataService.GetByIdAsync(createToDoItemRequest.ToDoListId, createToDoItemRequest.UserId);
+
+            if (toDoList == null)
+                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+
             var item = await _toDoItemDataService.AddAsync(_mapper.Map<ToDoItems>(createToDoItemRequest));
             return _mapper.Map<ToDoItemResponseDto>(item);
 
@@ -63,7 +71,7 @@ namespace ToDoApp.Business
             return toDoItems;
         }
 
-        public async Task UpdateAsync(long itemId, ToDoItemRequestDto updateToDoItemRequest)
+        public async Task UpdateAsync(long itemId, UpdateToDoItemRequestDto updateToDoItemRequest)
         {
             var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, updateToDoItemRequest.UserId);
             if (dbItem == null)
@@ -76,14 +84,25 @@ namespace ToDoApp.Business
             await _toDoItemDataService.UpdateItemPatchAsync(itemId, userId, item);
         }
 
-        public async Task<bool> AssignLabel(AssignLabelRequestDto assignLabelRequestDto)
+        public async Task<bool> AssignLabel(long toDoItemId, AssignLabelRequestDto assignLabelRequestDto, ILableAppService lableAppService)
         {
-            var dbItem = await _toDoItemDataService.GetByIdAsync(assignLabelRequestDto.EntityId, assignLabelRequestDto.UserId);
-            if (dbItem == null)
-                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+            List<LabelToDoItem> lstLabelToDoItem= new List<LabelToDoItem>();
+            if (assignLabelRequestDto.LabelId.Count > 0)
+            {
+                for (int i = 0; i <= assignLabelRequestDto.LabelId.Count - 1; i++)
+                {
 
-            dbItem.LabelId = assignLabelRequestDto.LabelId;
-            await _toDoItemDataService.UpdateAsync(dbItem);
+                    lstLabelToDoItem.Add(new LabelToDoItem
+                    {
+                        LabelId = assignLabelRequestDto.LabelId[i],
+                        ToDoItemId = toDoItemId
+                    });
+                }
+            }
+
+            LabelToDoItem[] labelToDoItems = lstLabelToDoItem.ToArray<LabelToDoItem>();
+
+            await _toDoItemDataService.AssignLabel(labelToDoItems);
             return true;
         }
     }

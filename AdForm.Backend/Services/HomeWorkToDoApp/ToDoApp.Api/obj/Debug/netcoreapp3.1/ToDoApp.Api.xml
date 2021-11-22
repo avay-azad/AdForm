@@ -15,6 +15,13 @@
             </summary>
             <param name="context">Authorization filter context.</param>
         </member>
+        <member name="M:ToDoApp.Api.Controllers.UserController.Authenticate(ToDoApp.Business.LoginRequestDto,FluentValidation.IValidator{ToDoApp.Business.LoginRequestDto})">
+            <summary>
+            Takes UserName and Password and generates token on successful authentication.
+            </summary>
+            <param name="request"></param>
+            <param name="validator"></param>
+        </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.#ctor(ToDoApp.Business.IToDoItemAppService)">
             <summary>
             Constructor
@@ -24,49 +31,82 @@
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Get(ToDoApp.Business.PaginationParameters)">
             <summary>
-            Get All Item with paging
+             Get all todoitem records.
             </summary>
             <param name="request"></param>
-            <returns></returns>
+            <returns>Returns Action Result type based on Success or Failure. </returns>
+            <response code="200"> Gets all todoitem reecords.</response>
+            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.GetItem(System.Int64)">
-            <summary>
-            Get item by Id
-            </summary>
-            <param name="id"></param>
-            <returns></returns>
+             <summary>
+            Get specific todoitem record.
+             </summary>
+             <param name="id"></param>
+             <returns>Returns Action result type based on Success/Failure.</returns>
+             <response code="200"> Gets specific todoitem record.</response>
+             <response code="404"> Error: 404 not found.</response>
+             <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Post(ToDoApp.Business.ToDoItemRequestDto,FluentValidation.IValidator{ToDoApp.Business.ToDoItemRequestDto})">
             <summary>
-            Create Item
+            Create todoitem record.
             </summary>
             <param name="request"></param>
             <param name="validator"></param>
-            <returns></returns>
+            <returns>Returns Action result type based on Success/Failure.</returns>
+            <response code="201"> Creates todoitem reecord and returns location where it is created.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="400"> The provided todoitem id should be positive integer.</response>
         </member>
-        <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Put(ToDoApp.Business.ToDoItemRequestDto,System.Int64,FluentValidation.IValidator{ToDoApp.Business.ToDoItemRequestDto})">
+        <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Put(ToDoApp.Business.UpdateToDoItemRequestDto,System.Int64,FluentValidation.IValidator{ToDoApp.Business.UpdateToDoItemRequestDto})">
             <summary>
-            Update item 
+             Update specific todoitem record. 
             </summary>
             <param name="request"></param>
             <param name="id"></param>
             <param name="validator"></param>
-            <returns></returns>
+            <returns>Returns ActionResult type based on Success/Failure.</returns>
+            <response code="200"> Updates specific todoitem reecord with details provided.</response>
+            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="400"> The provided todoitem id should be positive integer.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Patch(Microsoft.AspNetCore.JsonPatch.JsonPatchDocument,System.Int64)">
             <summary>
-            Partially update item
+            Partial update todoitem record with JsonPatch document.
             </summary>
             <param name="request"></param>
             <param name="id"></param>
-            <returns></returns>
+            <returns>Returns Action result type based on Success/Failure.</returns>
+            <response code="200"> Updates specific todoitem record with details provided.</response>
+            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="400"> The provided todoitem id should be positive integer.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Delete(System.Int64)">
             <summary>
-            Delete item
+            Delete specific todoItem record.
             </summary>
             <param name="id"></param>
-            <returns></returns>
+            <returns>Returns Action result type based on Success/Failure.</returns>
+            <response code="200"> Deletes specific todoitem reecord.</response>
+            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
+        </member>
+        <member name="M:ToDoApp.Api.Controllers.V1.ItemController.AssignLabels(ToDoApp.Business.AssignLabelRequestDto,System.Int64,ToDoApp.Business.ILableAppService,FluentValidation.IValidator{ToDoApp.Business.AssignLabelRequestDto})">
+            <summary>
+            Assign labels to specific todoitem.
+            </summary>
+            <param name="request"></param>
+            <param name="id"></param>
+            <param name="lableAppService"></param>
+            <param name="validator"></param>
+            <returns>Ok if successful else not found.</returns>
+            <response code="200"> Assigns specified label/s to todoitem record.</response>
+            <response code="404"> Error: 404 not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.LabelController.Get">
             <summary>
@@ -76,89 +116,118 @@
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.LabelController.GetLabel(System.Int64)">
             <summary>
-            Get label by Id
+            Get specific label record.
             </summary>
             <param name="id"></param>
-            <returns></returns>
+            <returns>Returns Action result" type based on Success/Failure.</returns>
+            <response code="200"> Gets specified label.</response>
+            <response code="404"> A label with the specified label ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.LabelController.Post(ToDoApp.Business.LabelRequestDto,FluentValidation.IValidator{ToDoApp.Business.LabelRequestDto})">
             <summary>
-            Craete label
+            Create Label record.
             </summary>
             <param name="request"></param>
             <param name="validator"></param>
-            <returns></returns>
+            <returns>Returns Action result type based on Success/Failure.</returns>
+            <response code="201"> Creates Label and returns location where it is created.</response>
+            <response code="400"> Invalid request format.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.LabelController.Delete(System.Int64)">
             <summary>
-            Delete label
+            Delete specific label record.
             </summary>
             <param name="id"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ToDoApp.Api.Controllers.V1.LabelController.AssignLabelToList(ToDoApp.Business.AssignLabelRequestDto,System.Int64,ToDoApp.Business.IToDoListAppService)">
-            <summary>
-            Assign label to list
-            </summary>
-            <param name="request"></param>
-            <param name="id"></param>
-            <param name="toDoListAppService"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ToDoApp.Api.Controllers.V1.LabelController.AssignLabelToItem(ToDoApp.Business.AssignLabelRequestDto,System.Int64,ToDoApp.Business.IToDoItemAppService)">
-            <summary>
-            Assign label to item
-            </summary>
-            <param name="request"></param>
-            <param name="id"></param>
-            <param name="toDoItemAppService"></param>
-            <returns></returns>
+            <returns>Returns Action result type based on Success/Failure.</returns>
+            <response code="200"> Deletes specified label record.</response>
+            <response code="404"> A label with the specified label ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Get(ToDoApp.Business.PaginationParameters)">
             <summary>
-            get list with paging and searching
+            Get all todolist records
             </summary>
             <param name="request"></param>
             <returns></returns>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.GetList(System.Int64)">
             <summary>
-            get list by Id
+            Get specific todolist record.
             </summary>
             <param name="id"></param>
-            <returns></returns>
+            <response code="200"> Gets specific todolist record.</response>
+            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Post(ToDoApp.Business.ToDoListRequestDto,FluentValidation.IValidator{ToDoApp.Business.ToDoListRequestDto})">
-            <summary>
-            Create List
-            </summary>
-            <param name="request"></param>
-            <param name="validator"></param>
-            <returns></returns>
+             <summary>
+             Create todolist record.
+             </summary>
+             <param name="request"></param>
+             <param name="validator"></param>
+             <returns>Returns Action result type based on Success/Failure.</returns>
+             /// <remarks>
+             Sample request:
+            
+                 POST /List
+                 {
+                    "ListName": List1
+                 }
+            
+             </remarks>
+             <response code="201"> Creates todolist record and returns the location where created.</response>
+             <response code="401"> Authorization information is missing or invalid.</response>
+             <response code="400"> Any request parameter is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Put(ToDoApp.Business.ToDoListRequestDto,System.Int64,FluentValidation.IValidator{ToDoApp.Business.ToDoListRequestDto})">
             <summary>
-            Update list
+            Update specific todolist record.
             </summary>
             <param name="request"></param>
             <param name="id"></param>
             <param name="validator"></param>
-            <returns></returns>
+            <returns>Returns ActionResult type based on Success/Failure.</returns>
+            <response code="200"> Updates specific todolist record with details provided.</response>
+            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="400"> Any request parameter is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Delete(System.Int64)">
             <summary>
-            Delete list
+            Delete specific todolist record.
             </summary>
             <param name="id"></param>
-            <returns></returns>
+            <returns>Returns Action result type based on Success/Failure.</returns>
+            <response code="200"> Deletes specific todolist record.</response>
+            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Patch(Microsoft.AspNetCore.JsonPatch.JsonPatchDocument,System.Int64)">
             <summary>
-            update list partially
+            Partial update specific todolist record with JsonPatch document.
             </summary>
             <param name="request"></param>
             <param name="id"></param>
-            <returns></returns>
+            <returns>Returns Action result type based on Success/Failure.</returns>
+            <response code="200"> Updates specific todolist record with details provided.</response>
+            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="400"> Any request parameter is missing or invalid.</response>
+        </member>
+        <member name="M:ToDoApp.Api.Controllers.V1.ListController.AssignLabels(ToDoApp.Business.AssignLabelRequestDto,System.Int64,ToDoApp.Business.ILableAppService,FluentValidation.IValidator{ToDoApp.Business.AssignLabelRequestDto})">
+            <summary>
+            Assign labels to specific todolist.
+            </summary>
+            <param name="request"></param>
+            <param name="id"></param>
+            <param name="lableAppService"></param>
+            <param name="validator"></param>
+            <returns>Ok if successful else not found.</returns>
+            <response code="200"> Assigns specified label/s to todolist record.</response>
+            <response code="404"> Error: 404 not found.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
         </member>
         <member name="T:ToDoApp.Api.LabelType">
             <summary>

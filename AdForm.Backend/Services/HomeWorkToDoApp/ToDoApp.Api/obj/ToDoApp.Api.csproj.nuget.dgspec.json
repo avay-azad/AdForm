@@ -54,6 +54,10 @@
               "target": "Package",
               "version": "[10.3.4, )"
             },
+            "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.Extensions.Configuration.Abstractions": {
               "target": "Package",
               "version": "[5.0.0, )"

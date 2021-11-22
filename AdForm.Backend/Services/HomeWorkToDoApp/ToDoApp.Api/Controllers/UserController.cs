@@ -7,6 +7,7 @@ using AdForm.Core;
 using FluentValidation.Results;
 using System.Net;
 using FluentValidation;
+using Microsoft.AspNetCore.Http;
 
 namespace ToDoApp.Api.Controllers
 {
@@ -25,6 +26,14 @@ namespace ToDoApp.Api.Controllers
             _userAppService = userAppService;
         }
 
+        /// <summary>
+        /// Takes UserName and Password and generates token on successful authentication.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="validator"></param>
+        // <returns>ApiResponse on User Login </returns>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost(AppConstants.Authenticate)]
         public async Task<IActionResult> Authenticate(LoginRequestDto request, [FromServices] IValidator<LoginRequestDto> validator)
         {

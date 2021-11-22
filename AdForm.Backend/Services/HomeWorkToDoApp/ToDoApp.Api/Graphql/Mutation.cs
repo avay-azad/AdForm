@@ -49,7 +49,8 @@ namespace ToDoApp.Api
 
             if (null == request || string.IsNullOrWhiteSpace(request.Name))
                 throw new ApiException(ErrorMessage.Label_Name_Empty, HttpStatusCode.BadRequest, ApiExceptionType.ValidationError);
-
+           
+            request.UserId = userId;
             var createdLabel = await _lableAppService.CreateAsync(request);
             return createdLabel;
         }
@@ -64,7 +65,8 @@ namespace ToDoApp.Api
         [Authorize]
         public async Task<bool> DeleteLabel([Service] IHttpContextAccessor contextAccessor, long id)
         {
-            await _lableAppService.DeleteAsync(id);
+            var userId = Convert.ToInt64(contextAccessor.HttpContext.Items["UserId"]);
+            await _lableAppService.DeleteAsync(id, userId);
             return true;
         }
 
@@ -170,11 +172,9 @@ namespace ToDoApp.Api
             if (null == request || string.IsNullOrWhiteSpace(request.ItemName))
                 throw new ArgumentNullException();
 
-            ToDoItemRequestDto toDoItemRequestDto = new ToDoItemRequestDto();
-            toDoItemRequestDto.ItemName = request.ItemName;
-            toDoItemRequestDto.UserId = userId;
+            request.UserId = userId;
           
-            await _toDoItemAppService.UpdateAsync(request.ItemId, toDoItemRequestDto);
+            await _toDoItemAppService.UpdateAsync(request.ToDoItemId, request);
 
             return true;
         }

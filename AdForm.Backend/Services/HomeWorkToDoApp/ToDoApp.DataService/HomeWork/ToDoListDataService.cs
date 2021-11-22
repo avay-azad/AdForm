@@ -23,6 +23,15 @@ namespace ToDoApp.DataService
             return list;
         }
 
+        public async Task AssignLabel(LabelToDoList[] labelToDoList)
+        {
+             _dbContext.LabelToDoLists.RemoveRange(labelToDoList);
+            await _dbContext.SaveChangesAsync();
+
+            await _dbContext.LabelToDoLists.AddRangeAsync(labelToDoList);
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<ToDoLists> DeleteAsync(ToDoLists list)
         {
             _dbContext.ToDoLists.Remove(list);
@@ -37,7 +46,7 @@ namespace ToDoApp.DataService
 
         public async Task<ToDoLists> GetByIdAsync(long listId, long userId)
         {
-            var result = await _dbContext.ToDoLists.FirstOrDefaultAsync(i => i.Id == listId && i.UserId == userId);
+            var result = await _dbContext.ToDoLists.FirstOrDefaultAsync(i => i.ToDoListId == listId && i.UserId == userId);
             return result;
         }
 
@@ -56,7 +65,7 @@ namespace ToDoApp.DataService
 
         public async Task UpdateToDoListPatchAsync(long listId, long userId, JsonPatchDocument item)
         {
-            var toDoList = await _dbContext.ToDoLists.FirstOrDefaultAsync(i => i.Id == listId && i.UserId == userId);
+            var toDoList = await _dbContext.ToDoLists.FirstOrDefaultAsync(i => i.ToDoListId == listId && i.UserId == userId);
             if (toDoList != null)
             {
                 item.ApplyTo(toDoList);

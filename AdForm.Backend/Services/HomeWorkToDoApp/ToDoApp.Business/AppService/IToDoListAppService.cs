@@ -13,6 +13,6 @@ namespace ToDoApp.Business
         Task DeleteAsync(long listId, long userId);
         Task UpdateToDoListPatchAsync(long listId, long userId, JsonPatchDocument list);
         Task<List<ToDoListResponseDto>> GetAsync(long userId);
-        Task<bool> AssignLabel(AssignLabelRequestDto assignLabelRequestDto);
+        Task<bool> AssignLabel(long toDoListId, AssignLabelRequestDto assignLabelRequestDto, ILableAppService lableAppService);
     }
 }

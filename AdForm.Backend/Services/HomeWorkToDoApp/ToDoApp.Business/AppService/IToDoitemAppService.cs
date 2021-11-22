@@ -10,10 +10,10 @@ namespace ToDoApp.Business
         Task<PagedList<ToDoItemResponseDto>> GetAsync(PaginationParameters pagination, long userId);
         Task<ToDoItemResponseDto> GetAsync(long itemId, long userId);
         Task<ToDoItemResponseDto> CreateAsync(ToDoItemRequestDto createToDoItemRequest);
-        Task UpdateAsync(long itemId, ToDoItemRequestDto updateToDoItemRequest);
+        Task UpdateAsync(long itemId, UpdateToDoItemRequestDto updateToDoItemRequest);
         Task DeleteAsync(long itemId, long userId);
         Task UpdateToDoItemPatchAsync(long itemId, long userId, JsonPatchDocument item);
         Task<List<ToDoItemResponseDto>> GetAsync(long userId);
-        Task<bool> AssignLabel(AssignLabelRequestDto assignLabelRequestDto);
+        Task<bool> AssignLabel(long toDoItemId, AssignLabelRequestDto assignLabelRequestDto, ILableAppService lableAppService);
     }
 }
