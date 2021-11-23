@@ -34,6 +34,7 @@ namespace ToDoApp.Api.Controllers
         // <returns>ApiResponse on User Login </returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost(AppConstants.Authenticate)]
         public async Task<IActionResult> Authenticate(LoginRequestDto request, [FromServices] IValidator<LoginRequestDto> validator)
         {

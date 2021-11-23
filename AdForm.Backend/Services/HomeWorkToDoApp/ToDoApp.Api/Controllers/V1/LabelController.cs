@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace ToDoApp.Api.Controllers.V1
 {
@@ -29,14 +30,31 @@ namespace ToDoApp.Api.Controllers.V1
         /// <summary>
         /// Get all label
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Returns Action Result type based on Success or Failure. </returns>
+        /// <response code="200"> Gets all labels records.</response>
+        /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get([FromQuery] PaginationParameters request)
         {
             var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
-            var labels = await _lableAppService.GetAsync(userId);
+  
+            PagedList<LabelResponseDto> labels = await _lableAppService.GetAsync(request, userId);
+            var metadata = new
+            {
+                labels.TotalCount,
+                labels.PageSize,
+                labels.CurrentPage,
+                labels.TotalPages,
+                labels.HasNext,
+                labels.HasPrevious
+            };
 
-            return Ok(new APIResponse<List<LabelResponseDto>> { IsSucess = true, Result = labels });
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
+            return Ok(new APIResponse<PagedList<LabelResponseDto>> { IsSucess = true, Result = labels });
         }
 
         /// <summary>
@@ -47,9 +65,11 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="200"> Gets specified label.</response>
         /// <response code="404"> A label with the specified label ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLabel([FromRoute] long id)
         {
@@ -67,9 +87,13 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="201"> Creates Label and returns location where it is created.</response>
         /// <response code="400"> Invalid request format.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
+        /// <response code="409"> If label name is already exist for user.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] LabelRequestDto request, [FromServices] IValidator<LabelRequestDto> validator)
         {
@@ -82,7 +106,7 @@ namespace ToDoApp.Api.Controllers.V1
             request.UserId = userId;
             var label = await _lableAppService.CreateAsync(request);
 
-            return CreatedAtAction(nameof(GetLabel), new { id = label.LabelId }, request);
+            return CreatedAtAction(nameof(GetLabel), new { id = label.LabelId }, label);
 
         }
 
@@ -94,9 +118,11 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="200"> Deletes specified label record.</response>
         /// <response code="404"> A label with the specified label ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] long id)
         {

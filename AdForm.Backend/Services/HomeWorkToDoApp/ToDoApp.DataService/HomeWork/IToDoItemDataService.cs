@@ -15,5 +15,6 @@ namespace ToDoApp.DataService
         Task<ToDoItems> DeleteAsync(ToDoItems item);
         Task UpdateItemPatchAsync(long itemId, long userId, JsonPatchDocument item);
         Task AssignLabel(LabelToDoItem[] labelToDoItems);
+        Task<List<LabelToDoItem>> GetAssignedLabelAsync(long toDoItemId);
     }
 }

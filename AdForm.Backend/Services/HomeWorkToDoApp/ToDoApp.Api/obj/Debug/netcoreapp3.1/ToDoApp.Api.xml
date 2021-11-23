@@ -26,7 +26,6 @@
             <summary>
             Constructor
             </summary>
-            <param name="logger"></param>
             <param name="toDoItemAppService"></param>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Get(ToDoApp.Business.PaginationParameters)">
@@ -35,9 +34,9 @@
             </summary>
             <param name="request"></param>
             <returns>Returns Action Result type based on Success or Failure. </returns>
-            <response code="200"> Gets all todoitem reecords.</response>
-            <response code="404"> A record with the specified todolist ID was not found.</response>
+            <response code="200"> Gets all todoitem records.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.GetItem(System.Int64)">
              <summary>
@@ -59,6 +58,8 @@
             <response code="201"> Creates todoitem reecord and returns location where it is created.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
             <response code="400"> The provided todoitem id should be positive integer.</response>
+            <response code="500"> If any unhandled exception occured.</response>
+            <response code="409"> If todoitem name is already exist for user.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Put(ToDoApp.Business.UpdateToDoItemRequestDto,System.Int64,FluentValidation.IValidator{ToDoApp.Business.UpdateToDoItemRequestDto})">
             <summary>
@@ -72,6 +73,7 @@
             <response code="404"> A record with the specified todolist ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
             <response code="400"> The provided todoitem id should be positive integer.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Patch(Microsoft.AspNetCore.JsonPatch.JsonPatchDocument,System.Int64)">
             <summary>
@@ -84,6 +86,7 @@
             <response code="404"> A record with the specified todolist ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
             <response code="400"> The provided todoitem id should be positive integer.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.Delete(System.Int64)">
             <summary>
@@ -94,6 +97,7 @@
             <response code="200"> Deletes specific todoitem reecord.</response>
             <response code="404"> A record with the specified todolist ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ItemController.AssignLabels(ToDoApp.Business.AssignLabelRequestDto,System.Int64,ToDoApp.Business.ILableAppService,FluentValidation.IValidator{ToDoApp.Business.AssignLabelRequestDto})">
             <summary>
@@ -107,12 +111,16 @@
             <response code="200"> Assigns specified label/s to todoitem record.</response>
             <response code="404"> Error: 404 not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
-        <member name="M:ToDoApp.Api.Controllers.V1.LabelController.Get">
+        <member name="M:ToDoApp.Api.Controllers.V1.LabelController.Get(ToDoApp.Business.PaginationParameters)">
             <summary>
             Get all label
             </summary>
-            <returns></returns>
+            <returns>Returns Action Result type based on Success or Failure. </returns>
+            <response code="200"> Gets all labels records.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.LabelController.GetLabel(System.Int64)">
             <summary>
@@ -123,6 +131,7 @@
             <response code="200"> Gets specified label.</response>
             <response code="404"> A label with the specified label ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.LabelController.Post(ToDoApp.Business.LabelRequestDto,FluentValidation.IValidator{ToDoApp.Business.LabelRequestDto})">
             <summary>
@@ -134,6 +143,8 @@
             <response code="201"> Creates Label and returns location where it is created.</response>
             <response code="400"> Invalid request format.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
+            <response code="409"> If label name is already exist for user.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.LabelController.Delete(System.Int64)">
             <summary>
@@ -144,13 +155,17 @@
             <response code="200"> Deletes specified label record.</response>
             <response code="404"> A label with the specified label ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Get(ToDoApp.Business.PaginationParameters)">
             <summary>
             Get all todolist records
             </summary>
             <param name="request"></param>
-            <returns></returns>
+            <returns>Returns Action Result type based on Success or Failure. </returns>
+            <response code="200"> Gets all todolist records.</response>
+            <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.GetList(System.Int64)">
             <summary>
@@ -160,6 +175,7 @@
             <response code="200"> Gets specific todolist record.</response>
             <response code="404"> A record with the specified todolist ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Post(ToDoApp.Business.ToDoListRequestDto,FluentValidation.IValidator{ToDoApp.Business.ToDoListRequestDto})">
              <summary>
@@ -180,6 +196,8 @@
              <response code="201"> Creates todolist record and returns the location where created.</response>
              <response code="401"> Authorization information is missing or invalid.</response>
              <response code="400"> Any request parameter is missing or invalid.</response>
+             <response code="500"> If any unhandled exception occured.</response>
+             <response code="409"> If List name is already exist for user.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Put(ToDoApp.Business.ToDoListRequestDto,System.Int64,FluentValidation.IValidator{ToDoApp.Business.ToDoListRequestDto})">
             <summary>
@@ -193,6 +211,7 @@
             <response code="404"> A record with the specified todolist ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
             <response code="400"> Any request parameter is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Delete(System.Int64)">
             <summary>
@@ -203,6 +222,7 @@
             <response code="200"> Deletes specific todolist record.</response>
             <response code="404"> A record with the specified todolist ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.Patch(Microsoft.AspNetCore.JsonPatch.JsonPatchDocument,System.Int64)">
             <summary>
@@ -215,6 +235,7 @@
             <response code="404"> A record with the specified todolist ID was not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
             <response code="400"> Any request parameter is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="M:ToDoApp.Api.Controllers.V1.ListController.AssignLabels(ToDoApp.Business.AssignLabelRequestDto,System.Int64,ToDoApp.Business.ILableAppService,FluentValidation.IValidator{ToDoApp.Business.AssignLabelRequestDto})">
             <summary>
@@ -228,6 +249,7 @@
             <response code="200"> Assigns specified label/s to todolist record.</response>
             <response code="404"> Error: 404 not found.</response>
             <response code="401"> Authorization information is missing or invalid.</response>
+            <response code="500"> If any unhandled exception occured.</response>
         </member>
         <member name="T:ToDoApp.Api.LabelType">
             <summary>

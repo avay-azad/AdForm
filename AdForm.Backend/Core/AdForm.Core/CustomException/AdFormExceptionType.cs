@@ -22,8 +22,12 @@
     }
     public enum ApiExceptionType
     {
-        ItemAlreadyExists,
-        ItemNotfound,
+        ToDoItemAlreadyExists,
+        ToDoItemNotfound,
+        ToDoListAlreadyExists,
+        ToDoListNotfound,
+        LabelAlreadyExists,
+        LabelNotfound,
         UnsupportedAppVersion,
         ValidationError
     }

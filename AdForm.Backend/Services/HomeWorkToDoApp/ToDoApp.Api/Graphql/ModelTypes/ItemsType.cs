@@ -12,6 +12,7 @@ namespace ToDoApp.Api
             descriptor.Field(a => a.CreatedDate).Type<DateTimeType>();
             descriptor.Field(a => a.UpdatedDate).Type<DateTimeType>();
             descriptor.Field(a => a.ToDoListId).Type<IdType>();
+            descriptor.Field(a => a.ToDoLabelIds).Type<ListsType>();
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ToDoApp.Business
         {
             var dbList = await _toDoListDataService.GetByNameAsync(createToDoListRequest.ListName, createToDoListRequest.UserId);
             if (dbList != null)
-                throw new ApiException(ErrorMessage.List_Exist, HttpStatusCode.Conflict, ApiExceptionType.ItemAlreadyExists);
+                throw new ApiException(ErrorMessage.List_Exist, HttpStatusCode.Conflict, ApiExceptionType.ToDoListAlreadyExists);
             var item = await _toDoListDataService.AddAsync(_mapper.Map<ToDoLists>(createToDoListRequest));
             return _mapper.Map<ToDoListResponseDto>(item);
         }
@@ -35,7 +35,7 @@ namespace ToDoApp.Business
         {
             var dbList = await _toDoListDataService.GetByIdAsync(listId, userId);
             if (dbList == null)
-                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ToDoListNotfound);
             await _toDoListDataService.DeleteAsync(dbList);
         }
 
@@ -55,7 +55,7 @@ namespace ToDoApp.Business
         {
             var dbList = await _toDoListDataService.GetByIdAsync(listId, userId);
             if (dbList == null)
-                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ToDoListNotfound);
             return _mapper.Map<ToDoListResponseDto>(dbList);
         }
 
@@ -67,9 +67,7 @@ namespace ToDoApp.Business
 
         public async Task UpdateAsync(long listId, ToDoListRequestDto updateToDoListRequest)
         {
-            var dbList = await _toDoListDataService.GetByIdAsync(listId, updateToDoListRequest.UserId);
-            if (dbList == null)
-                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+            await GetAsync(listId, updateToDoListRequest.UserId);
             await _toDoListDataService.UpdateAsync(_mapper.Map<ToDoLists>(updateToDoListRequest));
         }
 
@@ -79,19 +77,34 @@ namespace ToDoApp.Business
         }
         public async Task<bool> AssignLabel(long toDoListId, AssignLabelRequestDto assignLabelRequestDto, ILableAppService lableAppService)
         {
+            await GetAsync(toDoListId, assignLabelRequestDto.UserId);
+
             List<LabelToDoList> lstLabelToDoList = new List<LabelToDoList>();
             if (assignLabelRequestDto.LabelId.Count > 0)
             {
-                for(int i = 0; i <= assignLabelRequestDto.LabelId.Count-1; i++)
+                var assignedLabel = await _toDoListDataService.GetAssignedLabelAsync(toDoListId);
+                for (int i = 0; i <= assignLabelRequestDto.LabelId.Count - 1; i++)
                 {
+                    await lableAppService.GetAsync(assignLabelRequestDto.LabelId[i], assignLabelRequestDto.UserId);
 
-                    lstLabelToDoList.Add(new LabelToDoList { LabelId = assignLabelRequestDto.LabelId[i], ToDoListId = toDoListId });
+                    if (assignedLabel.Count > 0)
+                    {
+                        var allreadryAssigned = assignedLabel.FirstOrDefault(l => l.LabelId == assignLabelRequestDto.LabelId[i]);
+                        if (allreadryAssigned == null)
+                        {
+                            lstLabelToDoList.Add(new LabelToDoList { LabelId = assignLabelRequestDto.LabelId[i], ToDoListId = toDoListId });
+                        }
+                    }
+                    else
+                    {
+                        lstLabelToDoList.Add(new LabelToDoList { LabelId = assignLabelRequestDto.LabelId[i], ToDoListId = toDoListId });
+                    }
                 }
             }
 
             LabelToDoList[] labelToDoLists = lstLabelToDoList.ToArray<LabelToDoList>();
 
-             await _toDoListDataService.AssignLabel(labelToDoLists);
+            await _toDoListDataService.AssignLabel(labelToDoLists);
 
             return true;
         }

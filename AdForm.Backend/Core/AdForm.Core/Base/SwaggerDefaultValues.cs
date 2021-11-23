@@ -20,27 +20,13 @@ namespace AdForm.Core
             if (descriptor != null)
             {
 
-                //operation.Parameters.Add(new OpenApiParameter
-                //{
-                //    Name = HttpRequestHeaders.CorrelationId,
-                //    In = ParameterLocation.Header,
-                //    Description = HttpRequestHeaders.CorrelationId,
-                //    Required = false
-                //});
-                //operation.Parameters.Add(new OpenApiParameter
-                //{
-                //    Name = HttpRequestHeaders.Accept,
-                //    In = ParameterLocation.Header,
-                //    Description = HttpRequestHeaders.Accept,
-                //    Required = false
-                //});
-                //operation.Parameters.Add(new OpenApiParameter
-                //{
-                //    Name = HttpRequestHeaders.ContentLocation,
-                //    In = ParameterLocation.Header,
-                //    Description = HttpRequestHeaders.ContentLocation,
-                //    Required = false
-                //});
+                operation.Parameters.Add(new OpenApiParameter
+                {
+                    Name = HttpRequestHeaders.CorrelationId,
+                    In = ParameterLocation.Header,
+                    Description = HttpRequestHeaders.CorrelationId,
+                    Required = false
+                });
             }
         }
     }

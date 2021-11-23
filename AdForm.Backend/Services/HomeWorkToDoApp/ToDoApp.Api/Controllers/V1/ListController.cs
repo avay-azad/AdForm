@@ -31,7 +31,13 @@ namespace ToDoApp.Api.Controllers.V1
         /// Get all todolist records
         /// </summary>
         /// <param name="request"></param>
-        /// <returns></returns>
+        /// <returns>Returns Action Result type based on Success or Failure. </returns>
+        /// <response code="200"> Gets all todolist records.</response>
+        /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters request)
         {
@@ -58,9 +64,11 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="200"> Gets specific todolist record.</response>
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetList([FromRoute] long id)
         {
@@ -88,9 +96,13 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="201"> Creates todolist record and returns the location where created.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
         /// <response code="400"> Any request parameter is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
+        /// <response code="409"> If List name is already exist for user.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [HttpPost]
         public async Task<IActionResult> Post(ToDoListRequestDto request, [FromServices] IValidator<ToDoListRequestDto> validator)
         {
@@ -105,7 +117,7 @@ namespace ToDoApp.Api.Controllers.V1
 
             var toDoList = await _toDoListAppService.CreateAsync(request);
 
-            return CreatedAtAction(nameof(GetList), new { id = toDoList.ToDoListId }, request);
+            return CreatedAtAction(nameof(GetList), new { id = toDoList.ToDoListId }, toDoList);
 
         }
 
@@ -120,10 +132,12 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
         /// <response code="400"> Any request parameter is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody] ToDoListRequestDto request, [FromRoute] long id, [FromServices] IValidator<ToDoListRequestDto> validator)
         {
@@ -148,9 +162,11 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="200"> Deletes specific todolist record.</response>
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] long id)
         {
@@ -172,10 +188,12 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
         /// <response code="400"> Any request parameter is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch([FromBody] JsonPatchDocument request, [FromRoute] long id)
         {
@@ -198,9 +216,11 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="200"> Assigns specified label/s to todolist record.</response>
         /// <response code="404"> Error: 404 not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="500"> If any unhandled exception occured.</response>
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("{id}/AssignLabels")]
         public async Task<IActionResult> AssignLabels([FromBody] AssignLabelRequestDto request, [FromRoute] long id
             , [FromServices] ILableAppService lableAppService, [FromServices] IValidator<AssignLabelRequestDto> validator)
@@ -211,10 +231,6 @@ namespace ToDoApp.Api.Controllers.V1
             if (!validationResult.IsValid)
                 throw new ApiException(ApiErrorMessage.Global_Request_Validation, HttpStatusCode.BadRequest,
                     ApiExceptionType.ValidationError, validationResult.Errors);
-
-            var toDoList = _toDoListAppService.GetAsync(id);
-            if (toDoList == null)
-                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
 
             request.UserId = userId;
 

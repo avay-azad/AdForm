@@ -23,6 +23,16 @@ namespace ToDoApp.DataService
 
         public async Task<Labels> DeleteAsync(Labels label)
         {
+            var mappedList = _dbContext.LabelToDoLists.Where(l => l.LabelId == label.LabelId).ToList();
+            if (mappedList.Count > 0)
+            {
+                _dbContext.LabelToDoLists.RemoveRange(mappedList);
+            }
+            var mappedItem = _dbContext.LabelToDoItems.Where(l => l.LabelId == label.LabelId).ToList();
+            if (mappedItem.Count > 0)
+            {
+                _dbContext.LabelToDoItems.RemoveRange(mappedItem);
+            }
             _dbContext.Labels.Remove(label);
             await _dbContext.SaveChangesAsync();
             return label;

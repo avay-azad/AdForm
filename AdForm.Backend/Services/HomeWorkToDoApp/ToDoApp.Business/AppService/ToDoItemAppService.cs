@@ -27,12 +27,12 @@ namespace ToDoApp.Business
         {
             var dbItem = await _toDoItemDataService.GetByNameAsync(createToDoItemRequest.ItemName, createToDoItemRequest.UserId);
             if (dbItem != null)
-                throw new ApiException(ErrorMessage.Item_Exist, HttpStatusCode.Conflict, ApiExceptionType.ItemAlreadyExists);
+                throw new ApiException(ErrorMessage.Item_Exist, HttpStatusCode.Conflict, ApiExceptionType.ToDoItemAlreadyExists);
 
             var toDoList = await _toDoListDataService.GetByIdAsync(createToDoItemRequest.ToDoListId, createToDoItemRequest.UserId);
 
             if (toDoList == null)
-                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ToDoListNotfound);
 
             var item = await _toDoItemDataService.AddAsync(_mapper.Map<ToDoItems>(createToDoItemRequest));
             return _mapper.Map<ToDoItemResponseDto>(item);
@@ -43,7 +43,7 @@ namespace ToDoApp.Business
         {
             var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, userId);
             if (dbItem == null)
-                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ToDoItemNotfound);
             await _toDoItemDataService.DeleteAsync(dbItem);
         }
 
@@ -62,6 +62,9 @@ namespace ToDoApp.Business
         public async Task<ToDoItemResponseDto> GetAsync(long itemId, long userId)
         {
             var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, userId);
+            if (dbItem == null)
+                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ToDoItemNotfound);
+
             return _mapper.Map<ToDoItemResponseDto>(dbItem);
         }
 
@@ -73,9 +76,7 @@ namespace ToDoApp.Business
 
         public async Task UpdateAsync(long itemId, UpdateToDoItemRequestDto updateToDoItemRequest)
         {
-            var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, updateToDoItemRequest.UserId);
-            if (dbItem == null)
-                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ItemNotfound);
+            await GetAsync(itemId, updateToDoItemRequest.UserId);
             await _toDoItemDataService.UpdateAsync(_mapper.Map<ToDoItems>(updateToDoItemRequest));
         }
 
@@ -86,17 +87,34 @@ namespace ToDoApp.Business
 
         public async Task<bool> AssignLabel(long toDoItemId, AssignLabelRequestDto assignLabelRequestDto, ILableAppService lableAppService)
         {
-            List<LabelToDoItem> lstLabelToDoItem= new List<LabelToDoItem>();
+            await GetAsync(toDoItemId, assignLabelRequestDto.UserId);
+            List<LabelToDoItem> lstLabelToDoItem = new List<LabelToDoItem>();
             if (assignLabelRequestDto.LabelId.Count > 0)
             {
+                var assignedLabel = await _toDoItemDataService.GetAssignedLabelAsync(toDoItemId);
                 for (int i = 0; i <= assignLabelRequestDto.LabelId.Count - 1; i++)
                 {
-
-                    lstLabelToDoItem.Add(new LabelToDoItem
+                    await lableAppService.GetAsync(assignLabelRequestDto.LabelId[i], assignLabelRequestDto.UserId);
+                    if (assignedLabel.Count > 0)
                     {
-                        LabelId = assignLabelRequestDto.LabelId[i],
-                        ToDoItemId = toDoItemId
-                    });
+                        var allreadryAssigned = assignedLabel.FirstOrDefault(l => l.LabelId == assignLabelRequestDto.LabelId[i]);
+                        if (allreadryAssigned == null)
+                        {
+                            lstLabelToDoItem.Add(new LabelToDoItem
+                            {
+                                LabelId = assignLabelRequestDto.LabelId[i],
+                                ToDoItemId = toDoItemId
+                            });
+                        }
+                    }
+                    else
+                    {
+                        lstLabelToDoItem.Add(new LabelToDoItem
+                        {
+                            LabelId = assignLabelRequestDto.LabelId[i],
+                            ToDoItemId = toDoItemId
+                        });
+                    }
                 }
             }
 

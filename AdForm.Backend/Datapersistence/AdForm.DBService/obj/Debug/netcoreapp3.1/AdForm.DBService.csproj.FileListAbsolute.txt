@@ -29,3 +29,4 @@ C:\ProjectAssignment\AdForm.Backend\Datapersistence\AdForm.DBService\obj\Debug\n
 C:\ProjectAssignment\AdForm.Backend\Datapersistence\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.AssemblyInfo.cs
 C:\ProjectAssignment\AdForm.Backend\Datapersistence\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.dll
 C:\ProjectAssignment\AdForm.Backend\Datapersistence\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.pdb
+C:\ProjectAssignment\AdForm.Backend\Datapersistence\AdForm.DBService\obj\Debug\netcoreapp3.1\AdForm.DBService.csprojAssemblyReference.cache

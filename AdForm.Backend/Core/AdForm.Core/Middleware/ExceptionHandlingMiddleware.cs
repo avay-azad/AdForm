@@ -46,7 +46,7 @@ namespace AdForm.Core
                 statusCode = (HttpStatusCode)Enum.Parse(typeof(HttpStatusCode),
                     exception.Data["AdForm:HttpStatusCode"].ToString());
 
-                List<FluentValidation.Results.ValidationFailure> lstError = (List<FluentValidation.Results.ValidationFailure>)exception.Data["ENBD:FieldErrors"];
+                List<FluentValidation.Results.ValidationFailure> lstError = (List<FluentValidation.Results.ValidationFailure>)exception.Data["AdForm:FieldErrors"];
                 if (lstError != null)
                 {
                     listFieldErrors = lstError.Select(error => new ModelErrorResponse
