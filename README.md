@@ -1,5 +1,5 @@
 Homework_Adform
-Name: ToDo App Backend API (.Net Core)
+Name: ToDoApp.Api (.Net Core)
 
  
 
@@ -53,7 +53,6 @@ Step 6: Go the folder “AdForm.Backend\Services\AdFormAssignment\ToDoApp” and
 “dotnet run”
 
 Navigate to http://localhost:5000/ in a browser to play with the Swagger UI.
-Navigate to https://localhost:5001/ in a browser to play with the Swagger UI.
 
 
 Authorization
@@ -70,3 +69,14 @@ I have created 3 user
 1)UserName = "avay",Password = "Avay@123"
 1)UserName = "amar",Password = "Amar@123",
 1)UserName = "azad",Password = "Azad@123",
+
+
+Note - 
+1. A user has to create todo list first in order to add todo item. 
+2. One username can not be registered again.
+3. symetric encryption/decryption and Base64 password encoding algorithm is used.
+4. For response, a custom apiresponse class is setup for details.
+5. For all error response should be in one format 
+6. Serilog estensions is used for logging, logs can be checked in C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api\AdFormLog folder for current date text file
+7. For seeding data, only three user is added. 
+8. for checking Api you need to add List,Label,Items 
