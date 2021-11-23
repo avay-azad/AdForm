@@ -12,6 +12,11 @@ It also logs each and every request/response or error if any.
 
 Added support for GraphQL and unit test cases.
 
+DB Setup -
+
+1. Database is configured and migration is already present. It will be created when the application runs for the first time automatically. Only the connection string in appsettings.json needs to be changed accordingly.
+2. If database is to be updated with changes "Update-database" command will update the database.
+
 
 How to run application
 Approch 1 : Through visual studio
@@ -19,51 +24,24 @@ Step 1: Clone repo:
 git clone https://github.com/avay-azad/AdForm.git
 
 Step 2: AdForm.Backend solution in visual studio
-Step 3 : Open package Manage consloe and select project AdForm.DBService and run command
- Update-Database
 
-Step 4 : setup statup project ToDoApp andrun application
+Step 3 : setup statup project ToDoApp and run application
 
 
 Approch 2 : Through .Net Cli command
 
-Step 1: Clone repo:
-git clone https://github.com/avay-azad/AdForm.git
+Step 1: Clone repo in destination folder: git clone https://github.com/avay-azad/AdForm.git
 
-Step 2: Go the folder "AdForm.Backend" and run
-“dotnet restore”
+Step 2: Go to the project folder and run “dotnet restore” in cmd.
 
-setup Database 
+Step 3: Go the folder “AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api” and run “dotnet run” in cmd.
 
-Step 3 : based on enviornment Change connection string in file appsettings.Development or appsettings.Production
-like : "ConnectionStrings": {
-    "AdFormDataContext": "server=AVAYAZAD-01; database=AdFormDB_Development;Trusted_Connection=True;"
-  }
-  
-Step 4: Go the folder "AdForm.Backend\Datapersistence\DBService\AdForm.DBService" and run following command
-4.1: dotnet tool install --global dotnet-ef
-4.2 : dotnet tool update --global dotnet-ef
-4.3 :dotnet add package Microsoft.EntityFrameworkCore.Design
-4.4: dotnet ef
-
-Step 5: Go the folder “AdForm.Backend\Services\AdFormAssignment\ToDoApp” and run 
- dotnet ef database update -- --environment Development
-
-Step 6: Go the folder “AdForm.Backend\Services\AdFormAssignment\ToDoApp” and run 
-“dotnet run”
-
-Navigate to http://localhost:5000/ in a browser to play with the Swagger UI.
+Navigate to http://localhost:5000/PlayGround to play with GraphQl UI.
 
 
 Authorization
 
 Send token in "Authorization" header as "Bearer <token>" (Example: "Bearer sampletoken")
-
-Note
-=>Search field is available in PaginationParameters type.
-
-=>In Version please pass 1.
-
 
 I have created 3 user 
 1)UserName = "avay",Password = "Avay@123"
