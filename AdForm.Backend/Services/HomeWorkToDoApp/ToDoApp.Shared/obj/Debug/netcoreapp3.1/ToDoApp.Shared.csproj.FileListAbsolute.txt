@@ -12,3 +12,4 @@ C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Shared\obj\
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Shared\obj\Debug\netcoreapp3.1\ToDoApp.Shared.AssemblyInfo.cs
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Shared\obj\Debug\netcoreapp3.1\ToDoApp.Shared.dll
 C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Shared\obj\Debug\netcoreapp3.1\ToDoApp.Shared.pdb
+C:\ProjectAssignment\AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Shared\obj\Debug\netcoreapp3.1\ToDoApp.Shared.csprojAssemblyReference.cache
