@@ -32,7 +32,7 @@ Step 3 : setup statup project ToDoApp and run application
 
 Step 1: Clone repo in destination folder: git clone https://github.com/avay-azad/AdForm.git
 
-Step 2: Go to the project folder and run “dotnet restore” in cmd.
+Step 2: Go to the project folder "AdForm.Backend\" and run “dotnet restore” in cmd.
 
 Step 3: Go the folder “AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api” and run “dotnet run” in cmd.
 
