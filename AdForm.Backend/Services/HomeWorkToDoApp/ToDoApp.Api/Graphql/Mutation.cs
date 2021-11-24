@@ -26,8 +26,7 @@ namespace ToDoApp.Api
         /// <param name="lableAppService"> Label Service</param>
         /// <param name="toDoItemAppService"> ToDoItem Service</param>
         /// <param name="toDoListAppService">List service</param>
-        /// <param name="mapper">Auto mapper</param>
-        public Mutation([Service]ILableAppService lableAppService, [Service]IToDoItemAppService toDoItemAppService, [Service]IToDoListAppService toDoListAppService)
+          public Mutation([Service]ILableAppService lableAppService, [Service]IToDoItemAppService toDoItemAppService, [Service]IToDoListAppService toDoListAppService)
         {
             _lableAppService = lableAppService;
             _toDoItemAppService = toDoItemAppService;

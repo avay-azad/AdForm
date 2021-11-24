@@ -22,7 +22,6 @@ namespace ToDoApp.Api
         /// <param name="lableAppService"> Label Service</param>
         /// <param name="toDoItemAppService"> ToDoItem Service</param>
         /// <param name="toDoListAppService">List service</param>
-        /// <param name="mapper">Auto mapper</param>
         public Query([Service]ILableAppService lableAppService, [Service]IToDoItemAppService toDoItemAppService, [Service]IToDoListAppService toDoListAppService)
         {
             _lableAppService = lableAppService;
