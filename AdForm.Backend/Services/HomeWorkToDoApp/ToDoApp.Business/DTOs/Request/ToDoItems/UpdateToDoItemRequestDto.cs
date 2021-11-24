@@ -8,6 +8,7 @@ namespace ToDoApp.Business
         public string ItemName { get; set; }
         [IgnoreDataMember, JsonIgnore]
         public long UserId { get; set; }
+        [IgnoreDataMember, JsonIgnore]
         public long ToDoItemId { get; set; }
     }
 }
