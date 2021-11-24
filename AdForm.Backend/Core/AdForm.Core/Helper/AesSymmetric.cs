@@ -19,7 +19,6 @@ namespace AdForm.Core
             return Encoding.UTF8.GetString(AesDecrypt(Convert.FromBase64String(data), Convert.FromBase64String(key)));
         }
 
-
         private static byte[] AesEncrypt(byte[] data, byte[] key)
         {
             if (data == null || data.Length <= 0)
@@ -48,7 +47,6 @@ namespace AdForm.Core
                     using (var tCryptoStream = new CryptoStream(cipherStream, encrypter, CryptoStreamMode.Write))
                     using (var tBinaryWriter = new BinaryWriter(tCryptoStream))
                     {
-                        // prepend IV to data
                         cipherStream.Write(iv);
                         tBinaryWriter.Write(data);
                         tCryptoStream.FlushFinalBlock();
@@ -80,7 +78,6 @@ namespace AdForm.Core
                 Padding = PaddingMode.PKCS7
             })
             {
-                // get first KeySize bytes of IV and use it to decrypt
                 var iv = new byte[AesVectorIvkeySize];
                 Array.Copy(data, 0, iv, 0, iv.Length);
 
@@ -89,16 +86,14 @@ namespace AdForm.Core
                     using (var cs = new CryptoStream(ms, aes.CreateDecryptor(aes.Key, iv), CryptoStreamMode.Write))
                     using (var binaryWriter = new BinaryWriter(cs))
                     {
-                        // decrypt cipher text from data, starting just past the IV
                         binaryWriter.Write(
-                            data,
-                            iv.Length,
-                            data.Length - iv.Length
-                        );
+                                            data,
+                                            iv.Length,
+                                            data.Length - iv.Length
+                                           );
                     }
 
                     var dataBytes = ms.ToArray();
-
                     return dataBytes;
                 }
             }

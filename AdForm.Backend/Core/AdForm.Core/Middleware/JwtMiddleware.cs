@@ -22,7 +22,6 @@ namespace AdForm.Core
             var userId = jwtUtils.ValidateToken(token);
             if (userId != null)
             {
-                // attach user to context on successful jwt validation
                 context.Items["UserId"] = userId;
             }
 

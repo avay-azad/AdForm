@@ -20,7 +20,6 @@ namespace ToDoApp.Api
             var userId = context.HttpContext.Items["UserId"];
             if (userId == null)
             {
-                // not logged in
                 context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
             }
         }

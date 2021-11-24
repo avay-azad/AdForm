@@ -29,7 +29,7 @@ namespace ToDoApp.Api.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <param name="validator"></param>
-        // <returns>ApiResponse on User Login </returns>
+        /// <returns>ApiResponse on User Login </returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -43,7 +43,6 @@ namespace ToDoApp.Api.Controllers
 
             long userId = await _userAppService.AuthenticateUser(request);
 
-            // authentication successful so generate jwt token
             var token = _jwtUtils.GenerateToken(userId);
             return Ok(new APIResponse<string> { IsSucess = true, Result = token });
         }

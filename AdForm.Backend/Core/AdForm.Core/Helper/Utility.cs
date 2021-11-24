@@ -42,7 +42,6 @@ namespace AdForm.Core
                 for (var i = 0; i < props?.Length; i++)
                 {
                     if (i != 0)
-                        //join all the param values using comma
                         json.Append(", ");
 
                     var value = props[i].ParameterType.IsClass ? Serialize(param[i]) :

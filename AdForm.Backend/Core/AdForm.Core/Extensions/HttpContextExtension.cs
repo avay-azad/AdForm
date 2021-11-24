@@ -29,41 +29,5 @@ namespace AdForm.Core
             httpContext.Request.Headers.TryGetValue(HttpRequestHeaders.Authorization, out StringValues authorizationToken);
             return authorizationToken.FirstOrDefault() ?? httpContext.TraceIdentifier;
         }
-
-        //public static string GetLanguage(this HttpContext httpContext)
-        //{
-        //    httpContext.Request.Headers.TryGetValue(HttpRequestHeaders.AcceptLanguage, out StringValues language);
-        //    string locale = language.FirstOrDefault() ?? GlobalConstants.Culture_English;
-        //    return locale.Contains(GlobalConstants.Culture_Arabic) ? GlobalConstants.Culture_Arabic : GlobalConstants.Culture_English;
-        //}
-
-        //public static string GetAppVersion(this HttpContext httpContext)
-        //{
-        //    string appVersion = httpContext.GetUserAgent();
-        //    if (appVersion.Contains(GlobalConstants.ForwardSlash))
-        //    {
-        //        appVersion = appVersion.Split(GlobalConstants.ForwardSlash)[1].ToString();
-        //        if (appVersion.Contains(GlobalConstants.SmallOpenBracket))
-        //        {
-        //            appVersion = appVersion.Split(GlobalConstants.SmallOpenBracket)[0].ToString();
-        //        }
-        //    }
-
-        //    return appVersion;
-        //}
-
-//        public static string GetMetricsCurrentResourceName(this HttpContext httpContext)
-//        {
-//            if (httpContext == null)
-//                throw new ArgumentNullException(nameof(httpContext));
-
-//            Endpoint endpoint = httpContext.Features.Get<IEndpointFeature>()?.Endpoint;
-
-//#if NETCOREAPP3_1
-//            return endpoint?.Metadata.GetMetadata<EndpointNameMetadata>()?.EndpointName;
-//#else
-//                return endpoint?.Metadata.GetMetadata<IRouteValuesAddressMetadata>()?.RouteName;
-//#endif
-//        }
    }
 }
