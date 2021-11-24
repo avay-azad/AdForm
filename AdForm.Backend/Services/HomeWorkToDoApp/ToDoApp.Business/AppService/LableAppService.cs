@@ -1,12 +1,12 @@
-﻿using AdForm.DBService;
-using AdForm.Core;
-using ToDoApp.DataService;
-using ToDoApp.Shared;
+﻿using AdForm.Core;
+using AdForm.DBService;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Linq;
+using ToDoApp.DataService;
+using ToDoApp.Shared;
 
 namespace ToDoApp.Business
 {
@@ -38,7 +38,7 @@ namespace ToDoApp.Business
             await _labelDataService.DeleteAsync(dbLabel);
         }
 
-        public async Task<PagedList<LabelResponseDto>> GetAsync(PaginationParameters pagination, long userId)
+        public async Task<PagedList<LabelResponseDto>> GetAllAsync(PaginationParameters pagination, long userId)
         {
 
             var labels = _mapper.Map<List<LabelResponseDto>>(await _labelDataService.GetAllAsync(userId));
@@ -51,7 +51,7 @@ namespace ToDoApp.Business
             return PagedList<LabelResponseDto>.ToPagedList(labels, pagination.PageNumber, pagination.PageSize);
         }
 
-        public async Task<LabelResponseDto> GetAsync(long labelId, long userId)
+        public async Task<LabelResponseDto> GetByIdAsync(long labelId, long userId)
         {
             var dbLabel = await _labelDataService.GetByIdAsync(labelId, userId);
             if (dbLabel == null)

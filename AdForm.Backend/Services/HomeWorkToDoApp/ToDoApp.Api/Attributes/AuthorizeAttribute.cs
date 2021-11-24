@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using AdForm.Core;
 using Microsoft.AspNetCore.Mvc.Filters;
 using System;
+using System.Net;
 
 namespace ToDoApp.Api
 {
@@ -20,7 +20,7 @@ namespace ToDoApp.Api
             var userId = context.HttpContext.Items["UserId"];
             if (userId == null)
             {
-                context.Result = new JsonResult(new { message = "Unauthorized" }) { StatusCode = StatusCodes.Status401Unauthorized };
+                throw new AuthenticationException(ApiErrorMessage.Global_Authentication_Validation, HttpStatusCode.Unauthorized, AuthenticationExceptionType.TokenInvalid);
             }
         }
     }

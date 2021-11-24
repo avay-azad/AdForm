@@ -55,7 +55,7 @@ namespace AdForm.Backend.Test.ServiceTest
             try
             {
                 _userDataService.Setup(p => p.GetUsers(It.IsAny<Users>())).Returns(Task.FromResult(_noValidUser));
-                long userId = await _userAppService.AuthenticateUser(new LoginRequestDto() { UserName = "ajsdkjsa", Password = "kjsadksa" });
+                await _userAppService.AuthenticateUser(new LoginRequestDto() { UserName = "ajsdkjsa", Password = "kjsadksa" });
                 Assert.Fail();
             }
             catch (AuthenticationException )

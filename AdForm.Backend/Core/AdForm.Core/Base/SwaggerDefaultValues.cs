@@ -24,7 +24,7 @@ namespace AdForm.Core
                 {
                     Name = HttpRequestHeaders.CorrelationId,
                     In = ParameterLocation.Header,
-                    Description = HttpRequestHeaders.CorrelationId,
+                    Description = "Id to track particular request / response",
                     Required = false
                 });
             }

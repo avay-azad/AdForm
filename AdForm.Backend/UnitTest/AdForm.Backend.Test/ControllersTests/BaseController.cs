@@ -25,7 +25,7 @@ namespace AdForm.Backend.Test
         private readonly LabelResponseDto _labelResponseDto = new LabelResponseDto { LabelId = 1 };
         private readonly ToDoListResponseDto _toDoListResponseDto = new ToDoListResponseDto { Name = "Test", ToDoListId = 1 };
         private readonly ToDoItemResponseDto _toDoItemResponseDto = new ToDoItemResponseDto { Name = "Test", ToDoItemId = 1, ToDoListId = 1 };
-        private long _userId = 1;
+        private readonly long _userId = 1;
 
         protected BaseController()
         {
@@ -45,15 +45,15 @@ namespace AdForm.Backend.Test
             //Mock methods
             LabelService.Setup(p => p.CreateAsync(It.IsAny<LabelRequestDto>())).Returns(Task.FromResult(_labelResponseDto));
             LabelService.Setup(p => p.DeleteAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(1));
-            LabelService.Setup(p => p.GetAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(_labelResponseDto));
+            LabelService.Setup(p => p.GetByIdAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(_labelResponseDto));
             UserService.Setup(p => p.AuthenticateUser(It.IsAny<LoginRequestDto>())).Returns(Task.FromResult(_userId));
             ToDoListService.Setup(p => p.CreateAsync(It.IsAny<ToDoListRequestDto>())).Returns(Task.FromResult(_toDoListResponseDto));
             ToDoListService.Setup(p => p.DeleteAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(1));
-            ToDoListService.Setup(p => p.GetAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(_toDoListResponseDto));
+            ToDoListService.Setup(p => p.GetByIdAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(_toDoListResponseDto));
             ToDoListService.Setup(p => p.UpdateAsync(It.IsAny<long>(), It.IsAny<UpdateToDoListRequestDto>())).Returns(Task.FromResult(_toDoListResponseDto));
             ToDoItemService.Setup(p => p.CreateAsync(It.IsAny<ToDoItemRequestDto>())).Returns(Task.FromResult(_toDoItemResponseDto));
             ToDoItemService.Setup(p => p.DeleteAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(1));
-            ToDoItemService.Setup(p => p.GetAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(_toDoItemResponseDto));
+            ToDoItemService.Setup(p => p.GetByIdAsync(It.IsAny<long>(), It.IsAny<long>())).Returns(Task.FromResult(_toDoItemResponseDto));
             ToDoItemService.Setup(p => p.UpdateAsync(It.IsAny<long>(), It.IsAny<UpdateToDoItemRequestDto>())).Returns(Task.FromResult(_toDoItemResponseDto));
 
         }

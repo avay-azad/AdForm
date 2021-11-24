@@ -1,12 +1,11 @@
-﻿using ToDoApp.Business;
-using HotChocolate;
+﻿using HotChocolate;
 using HotChocolate.Types;
 using HotChocolate.Types.Relay;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ToDoApp.Business;
 
 namespace ToDoApp.Api
 {

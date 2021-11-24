@@ -47,7 +47,7 @@ namespace ToDoApp.Business
             await _toDoItemDataService.DeleteAsync(dbItem);
         }
 
-        public async Task<PagedList<ToDoItemResponseDto>> GetAsync(PaginationParameters pagination, long userId)
+        public async Task<PagedList<ToDoItemResponseDto>> GetAllAsync(PaginationParameters pagination, long userId)
         {
             var toDoItems = _mapper.Map<List<ToDoItemResponseDto>>(await _toDoItemDataService.GetAllAsync(userId));
 
@@ -59,7 +59,7 @@ namespace ToDoApp.Business
             return PagedList<ToDoItemResponseDto>.ToPagedList(toDoItems, pagination.PageNumber, pagination.PageSize);
         }
 
-        public async Task<ToDoItemResponseDto> GetAsync(long itemId, long userId)
+        public async Task<ToDoItemResponseDto> GetByIdAsync(long itemId, long userId)
         {
             var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, userId);
             if (dbItem == null)
@@ -76,7 +76,7 @@ namespace ToDoApp.Business
 
         public async Task UpdateAsync(long itemId, UpdateToDoItemRequestDto updateToDoItemRequest)
         {
-            await GetAsync(itemId, updateToDoItemRequest.UserId);
+            await GetByIdAsync(itemId, updateToDoItemRequest.UserId);
             await _toDoItemDataService.UpdateAsync(_mapper.Map<ToDoItems>(updateToDoItemRequest));
         }
 
@@ -87,14 +87,14 @@ namespace ToDoApp.Business
 
         public async Task<bool> AssignLabel(long toDoItemId, AssignLabelRequestDto assignLabelRequestDto, ILableAppService lableAppService)
         {
-            await GetAsync(toDoItemId, assignLabelRequestDto.UserId);
+            await GetByIdAsync(toDoItemId, assignLabelRequestDto.UserId);
             List<LabelToDoItem> lstLabelToDoItem = new List<LabelToDoItem>();
             if (assignLabelRequestDto.LabelId.Count > 0)
             {
                 var assignedLabel = await _toDoItemDataService.GetAssignedLabelAsync(toDoItemId);
                 for (int i = 0; i <= assignLabelRequestDto.LabelId.Count - 1; i++)
                 {
-                    await lableAppService.GetAsync(assignLabelRequestDto.LabelId[i], assignLabelRequestDto.UserId);
+                    await lableAppService.GetByIdAsync(assignLabelRequestDto.LabelId[i], assignLabelRequestDto.UserId);
                     if (assignedLabel.Count > 0)
                     {
                         var allreadryAssigned = assignedLabel.FirstOrDefault(l => l.LabelId == assignLabelRequestDto.LabelId[i]);

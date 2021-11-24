@@ -6,8 +6,8 @@ namespace ToDoApp.Business
 {
     public interface IToDoListAppService
     {
-        Task<PagedList<ToDoListResponseDto>> GetAsync(PaginationParameters pagination, long userId);
-        Task<ToDoListResponseDto> GetAsync(long listId, long userId);
+        Task<PagedList<ToDoListResponseDto>> GetAllAsync(PaginationParameters pagination, long userId);
+        Task<ToDoListResponseDto> GetByIdAsync(long listId, long userId);
         Task<ToDoListResponseDto> CreateAsync(ToDoListRequestDto createToDoListRequest);
         Task UpdateAsync(long listId , ToDoListRequestDto updateToDoListRequest);
         Task DeleteAsync(long listId, long userId);

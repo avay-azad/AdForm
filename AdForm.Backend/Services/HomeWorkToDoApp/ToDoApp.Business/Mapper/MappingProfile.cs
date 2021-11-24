@@ -9,7 +9,6 @@ namespace ToDoApp.Business
         {
             CreateMap<Users, LoginRequestDto>().ReverseMap();
 
-            //ToDo Items
             CreateMap<ToDoItems, ToDoItemRequestDto>()
               .ForMember(dest => dest.ItemName, src => src.MapFrom(x => x.Name)).ReverseMap();
 
@@ -25,7 +24,6 @@ namespace ToDoApp.Business
                  .ForMember(dest => dest.ToDoLabelIds, src => src.MapFrom(x => x.LabelToDoItems)).ReverseMap();
 
 
-            //ToDo List
             CreateMap<ToDoLists, ToDoListRequestDto>()
             .ForMember(dest => dest.ListName, src => src.MapFrom(x => x.Name)).ReverseMap();
 

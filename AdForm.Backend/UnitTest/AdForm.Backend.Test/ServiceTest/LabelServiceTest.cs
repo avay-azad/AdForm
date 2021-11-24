@@ -68,7 +68,7 @@ namespace AdForm.Backend.Test.ServiceTest
         [Test]
         public async Task GetLabelById()
         {
-            LabelResponseDto result = await _lableAppService.GetAsync(1, 1);
+            LabelResponseDto result = await _lableAppService.GetByIdAsync(1, 1);
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.LabelId);
         }
@@ -76,7 +76,7 @@ namespace AdForm.Backend.Test.ServiceTest
         [Test]
         public async Task GetLabels()
         {
-            PagedList<LabelResponseDto> result = await _lableAppService.GetAsync(paginationParameters, 1);
+            PagedList<LabelResponseDto> result = await _lableAppService.GetAllAsync(paginationParameters, 1);
             Assert.IsNotNull(result);
         }
     }

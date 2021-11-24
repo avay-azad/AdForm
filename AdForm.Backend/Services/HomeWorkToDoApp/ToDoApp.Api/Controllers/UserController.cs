@@ -30,9 +30,14 @@ namespace ToDoApp.Api.Controllers
         /// <param name="request"></param>
         /// <param name="validator"></param>
         /// <returns>ApiResponse on User Login </returns>
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        /// <response code="200"> Get jwt token.</response>
+        /// <response code="401"> Authorization information is missing or invalid.</response>
+        /// <response code="400"> Any request parameter is missing or invalid.</response>
+        /// <response code="500"> Some unexpected error occurred.</response>
+        [ProducesResponseType(typeof(APIResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status500InternalServerError)]
         [HttpPost(AppConstants.Authenticate)]
         public async Task<IActionResult> Authenticate(LoginRequestDto request, [FromServices] IValidator<LoginRequestDto> validator)
         {

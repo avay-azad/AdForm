@@ -34,15 +34,15 @@ namespace ToDoApp.Api.Controllers.V1
         /// <returns>Returns Action Result type based on Success or Failure. </returns>
         /// <response code="200"> Gets all todolist records.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
-        /// <response code="500"> If any unhandled exception occured.</response>
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        /// <response code="500"> Some unexpected error occurred.</response>
+        [ProducesResponseType(typeof(Error), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(APIResponse<PagedList<ToDoListResponseDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status500InternalServerError)]
         [HttpGet]
         public async Task<IActionResult> Get([FromQuery] PaginationParameters request)
         {
             var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
-            PagedList<ToDoListResponseDto> items = await _toDoListAppService.GetAsync(request, userId);
+            PagedList<ToDoListResponseDto> items = await _toDoListAppService.GetAllAsync(request, userId);
             var metadata = new
             {
                 items.TotalCount,
@@ -64,16 +64,16 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="200"> Gets specific todolist record.</response>
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
-        /// <response code="500"> If any unhandled exception occured.</response>
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        /// <response code="500"> Some unexpected error occurred.</response>
+        [ProducesResponseType(typeof(Error), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(APIResponse<ToDoListResponseDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetList([FromRoute] long id)
         {
             var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
-            var toDolist = await _toDoListAppService.GetAsync(id, userId);
+            var toDolist = await _toDoListAppService.GetByIdAsync(id, userId);
 
             return Ok(new APIResponse<ToDoListResponseDto> { IsSucess = true, Result = toDolist });
         }
@@ -96,13 +96,13 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="201"> Creates todolist record and returns the location where created.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
         /// <response code="400"> Any request parameter is missing or invalid.</response>
-        /// <response code="500"> If any unhandled exception occured.</response>
-        /// <response code="409"> If List name is already exist for user.</response>
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        /// <response code="409"> ToDoList is already exist for user.</response>
+        /// <response code="500"> Some unexpected error occurred.</response>
+        [ProducesResponseType(typeof(Error), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(ToDoListResponseDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> Post(ToDoListRequestDto request, [FromServices] IValidator<ToDoListRequestDto> validator)
         {
@@ -132,12 +132,12 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
         /// <response code="400"> Any request parameter is missing or invalid.</response>
-        /// <response code="500"> If any unhandled exception occured.</response>
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        /// <response code="500"> Some unexpected error occurred.</response>
+        [ProducesResponseType(typeof(Error), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(APIResponse<object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody] ToDoListRequestDto request, [FromRoute] long id, [FromServices] IValidator<ToDoListRequestDto> validator)
         {
@@ -162,11 +162,11 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="200"> Deletes specific todolist record.</response>
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
-        /// <response code="500"> If any unhandled exception occured.</response>
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        /// <response code="500"> Some unexpected error occurred.</response>
+        [ProducesResponseType(typeof(Error), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(APIResponse<object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] long id)
         {
@@ -188,12 +188,12 @@ namespace ToDoApp.Api.Controllers.V1
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
         /// <response code="400"> Any request parameter is missing or invalid.</response>
-        /// <response code="500"> If any unhandled exception occured.</response>
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        /// <response code="500"> Some unexpected error occurred.</response>
+        [ProducesResponseType(typeof(Error), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(APIResponse<object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
         [HttpPatch("{id}")]
         public async Task<IActionResult> Patch([FromBody] JsonPatchDocument request, [FromRoute] long id)
         {
@@ -215,12 +215,14 @@ namespace ToDoApp.Api.Controllers.V1
         /// <returns>Ok if successful else not found.</returns>
         /// <response code="200"> Assigns specified label/s to todolist record.</response>
         /// <response code="404"> Error: 404 not found.</response>
+        /// <response code="400"> Any request parameter is missing or invalid.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
-        /// <response code="500"> If any unhandled exception occured.</response>
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        /// <response code="500"> Some unexpected error occurred.</response>
+        [ProducesResponseType(typeof(Error), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(APIResponse<object>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(Error), StatusCodes.Status400BadRequest)]
         [HttpPut("{id}/AssignLabels")]
         public async Task<IActionResult> AssignLabels([FromBody] AssignLabelRequestDto request, [FromRoute] long id
             , [FromServices] ILableAppService lableAppService, [FromServices] IValidator<AssignLabelRequestDto> validator)

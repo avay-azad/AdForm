@@ -1,13 +1,11 @@
-﻿using ToDoApp.Business;
-using AutoMapper;
+﻿using AdForm.Core;
 using HotChocolate;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Threading.Tasks;
-using AdForm.Core;
-using ToDoApp.Shared;
 using System.Net;
+using System.Threading.Tasks;
+using ToDoApp.Business;
+using ToDoApp.Shared;
 
 namespace ToDoApp.Api
 {
@@ -19,14 +17,14 @@ namespace ToDoApp.Api
         private readonly ILableAppService _lableAppService;
         private readonly IToDoItemAppService _toDoItemAppService;
         private readonly IToDoListAppService _toDoListAppService;
-       
+
         /// <summary>
         /// Create new instance of <see cref="Mutation"/> class.
         /// </summary>
         /// <param name="lableAppService"> Label Service</param>
         /// <param name="toDoItemAppService"> ToDoItem Service</param>
         /// <param name="toDoListAppService">List service</param>
-          public Mutation([Service]ILableAppService lableAppService, [Service]IToDoItemAppService toDoItemAppService, [Service]IToDoListAppService toDoListAppService)
+        public Mutation([Service]ILableAppService lableAppService, [Service]IToDoItemAppService toDoItemAppService, [Service]IToDoListAppService toDoListAppService)
         {
             _lableAppService = lableAppService;
             _toDoItemAppService = toDoItemAppService;
@@ -48,7 +46,7 @@ namespace ToDoApp.Api
 
             if (null == request || string.IsNullOrWhiteSpace(request.Name))
                 throw new ApiException(ErrorMessage.Label_Name_Empty, HttpStatusCode.BadRequest, ApiExceptionType.ValidationError);
-           
+
             request.UserId = userId;
             var createdLabel = await _lableAppService.CreateAsync(request);
             return createdLabel;
@@ -85,7 +83,7 @@ namespace ToDoApp.Api
             var userId = Convert.ToInt64(contextAccessor.HttpContext.Items["UserId"]);
 
             if (null == request || string.IsNullOrWhiteSpace(request.ListName))
-                throw new ArgumentNullException();
+                throw new ApiException(ApiErrorMessage.Global_Request_Validation, HttpStatusCode.BadRequest, ApiExceptionType.ValidationError);
 
             request.UserId = userId;
 
@@ -104,7 +102,8 @@ namespace ToDoApp.Api
             var userId = Convert.ToInt64(contextAccessor.HttpContext.Items["UserId"]);
 
             if (null == request || string.IsNullOrWhiteSpace(request.ListName))
-                throw new ArgumentNullException();
+                throw new ApiException(ApiErrorMessage.Global_Request_Validation, HttpStatusCode.BadRequest, ApiExceptionType.ValidationError);
+
 
             ToDoListRequestDto toDoListRequestDto = new ToDoListRequestDto();
             toDoListRequestDto.ListName = request.ListName;
@@ -128,11 +127,11 @@ namespace ToDoApp.Api
             var userId = Convert.ToInt64(contextAccessor.HttpContext.Items["UserId"]);
 
             if (id <= 0)
-                throw new ArgumentNullException();
+                throw new ApiException(ApiErrorMessage.Global_Request_Validation, HttpStatusCode.BadRequest, ApiExceptionType.ValidationError);
 
             await _toDoListAppService.DeleteAsync(id, userId);
 
-            return true; ;
+            return true;
         }
         #endregion
 
@@ -149,7 +148,7 @@ namespace ToDoApp.Api
             var userId = Convert.ToInt64(contextAccessor.HttpContext.Items["UserId"]);
 
             if (null == request || string.IsNullOrWhiteSpace(request.ItemName))
-                throw new ArgumentNullException();
+                throw new ApiException(ApiErrorMessage.Global_Request_Validation, HttpStatusCode.BadRequest, ApiExceptionType.ValidationError);
 
             request.UserId = userId;
 
@@ -169,10 +168,10 @@ namespace ToDoApp.Api
             var userId = Convert.ToInt64(contextAccessor.HttpContext.Items["UserId"]);
 
             if (null == request || string.IsNullOrWhiteSpace(request.ItemName))
-                throw new ArgumentNullException();
+                throw new ApiException(ApiErrorMessage.Global_Request_Validation, HttpStatusCode.BadRequest, ApiExceptionType.ValidationError);
 
             request.UserId = userId;
-          
+
             await _toDoItemAppService.UpdateAsync(request.ToDoItemId, request);
 
             return true;
@@ -190,11 +189,11 @@ namespace ToDoApp.Api
             var userId = Convert.ToInt64(contextAccessor.HttpContext.Items["UserId"]);
 
             if (id <= 0)
-                throw new ArgumentNullException();
+                throw new ApiException(ApiErrorMessage.Global_Request_Validation, HttpStatusCode.BadRequest, ApiExceptionType.ValidationError);
 
             await _toDoItemAppService.DeleteAsync(id, userId);
 
-            return true; ;
+            return true;
         }
 
         #endregion

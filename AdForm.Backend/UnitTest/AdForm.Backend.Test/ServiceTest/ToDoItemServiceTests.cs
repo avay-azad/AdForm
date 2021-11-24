@@ -80,7 +80,7 @@ namespace AdForm.Backend.Test.ServiceTest
         [Test]
         public async Task GetToDoItemById()
         {
-            ToDoItemResponseDto result = await _toDoItemAppService.GetAsync(1, 1);
+            ToDoItemResponseDto result = await _toDoItemAppService.GetByIdAsync(1, 1);
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.ToDoItemId);
         }
@@ -88,7 +88,7 @@ namespace AdForm.Backend.Test.ServiceTest
         [Test]
         public async Task GetToDoItems()
         {
-            PagedList<ToDoItemResponseDto> result = await _toDoItemAppService.GetAsync(paginationParameters, 1);
+            PagedList<ToDoItemResponseDto> result = await _toDoItemAppService.GetAllAsync(paginationParameters, 1);
             Assert.IsNotNull(result);
         }
     }

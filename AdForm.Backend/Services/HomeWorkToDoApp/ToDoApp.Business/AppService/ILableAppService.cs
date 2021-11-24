@@ -9,8 +9,8 @@ namespace ToDoApp.Business
     {
         Task<LabelResponseDto> CreateAsync(LabelRequestDto labelRequestDto);
         Task DeleteAsync(long labelId, long userId);
-        Task<PagedList<LabelResponseDto>> GetAsync(PaginationParameters pagination, long userId);
-        Task<LabelResponseDto> GetAsync(long labelId, long userId);
+        Task<PagedList<LabelResponseDto>> GetAllAsync(PaginationParameters pagination, long userId);
+        Task<LabelResponseDto> GetByIdAsync(long labelId, long userId);
         Task<List<LabelResponseDto>> GetAsync(long userId);
     }
 }

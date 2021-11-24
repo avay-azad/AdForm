@@ -8,7 +8,7 @@ namespace ToDoApp.Business
     {
         public AssignLabelRequestvalidator()
         {
-            RuleForEach(x => x.LabelId).GreaterThanOrEqualTo(1).WithMessage(ErrorMessage.List_Id_Null).WithErrorCode(HttpStatusCode.BadRequest.ToString()); ;
+            RuleForEach(x => x.LabelId).GreaterThanOrEqualTo(1).WithMessage(ErrorMessage.List_Id_Null).WithErrorCode(HttpStatusCode.BadRequest.ToString());
         }
            
     }

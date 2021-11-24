@@ -1,10 +1,10 @@
 using AdForm.Core;
 using AdForm.DBService;
 using AutoMapper;
+using CorrelationId;
 using FluentValidation;
 using HotChocolate;
 using HotChocolate.AspNetCore;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using System;
 using System.Linq;
-using System.Reflection;
-using System.Text;
 using ToDoApp.Business;
 using ToDoApp.DataService;
-using ToDoApp.Shared;
 
 namespace ToDoApp.Api
 {
@@ -39,12 +33,14 @@ namespace ToDoApp.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //configure services for checking, logging and forwarding correlationID.
+            services.AddCorrelationIdHandlerAndDefaults();
             services.AddControllers(p => p.RespectBrowserAcceptHeader = true);
             services.AddControllersWithViews(options =>
             {
                 options.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
             }).AddNewtonsoftJson();
-            
+
             services.Configure<ApiBehaviorOptions>(options =>
              {
                  options.SuppressModelStateInvalidFilter = true;
@@ -68,10 +64,9 @@ namespace ToDoApp.Api
             AddAdFormAssignmentDBServices(services);
             AddAdFormValidator(services);
             AddAdFormServices(services);
-            RegisterSwagger(services, AppConstants.SwaggerVersion, AppConstants.SwaggerTitle,
-                AppConstants.SwaggerDescription, AppConstants.SwaggerDocumentName);
+            services.AddSwagger();
 
-            ConfigureAuthentication(services);
+            services.AddJwtAuthentication(Configuration);
             services.AddApiVersioning(x =>
             {
                 x.DefaultApiVersion = new ApiVersion(1, 0);
@@ -105,6 +100,8 @@ namespace ToDoApp.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCorrelationId();
+            app.UseContentLocationMiddleware();
             app.UseMiddleware(typeof(RequestResponseLoggingMiddleware));
             app.UseMiddleware(typeof(ExceptionHandlingMiddleware));
             app.UseMiddleware<JwtMiddleware>();
@@ -147,33 +144,6 @@ namespace ToDoApp.Api
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
         }
 
-        private void ConfigureAuthentication(IServiceCollection services)
-        {
-            string secret = Configuration.GetSection("AppSettings")
-                            .GetSection("Secret").Value;
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
-                    ClockSkew = TimeSpan.Zero,
-                    IssuerSigningKey =
-                        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
-                };
-
-                options.RequireHttpsMetadata = false;
-                options.SaveToken = true;
-            });
-
-        }
 
         private void ConfigureGraphQl(IServiceCollection services)
         {
@@ -186,40 +156,6 @@ namespace ToDoApp.Api
                .AddMutationType<Mutation>()
                .AddAuthorizeDirectiveType()
                .Create());
-        }
-
-        public virtual void RegisterSwagger(IServiceCollection services, string version, string title, string description, string documentName)
-        {
-            services.AddSwaggerGen(p =>
-            {
-                p.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-
-                p.AddSecurityDefinition(GlobalConstants.Bearer, new OpenApiSecurityScheme
-                {
-                    Description = description,
-                    Name = HttpRequestHeaders.Authorization,
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = GlobalConstants.Bearer
-                });
-                p.OperationFilter<SwaggerDefaultValues>();
-                p.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = GlobalConstants.Bearer
-                            }
-                        },
-                        Array.Empty<string>()
-                    }
-                });
-                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                p.IncludeXmlComments(System.IO.Path.Combine(AppContext.BaseDirectory, xmlFilename));
-            });
         }
 
         private void AddAdFormAssignmentDBServices(IServiceCollection services)
