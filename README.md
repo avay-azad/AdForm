@@ -1,9 +1,7 @@
-Homework_Adform
-Name: ToDoApp.Api (.Net Core)
+**Homework_Adform: ToDoApp.Api (.Net Core)**
 
  
-
-Description : 
+**Description:**
 
 A rest api project to do CRUD operations for todoitems or lists via HTTP Verbs (GET, POST, PUT, DELETE, PATCH).
 
@@ -12,14 +10,16 @@ It also logs each and every request/response or error if any.
 
 Added support for GraphQL and unit test cases.
 
-DB Setup -
+**DB Setup -**
 
 1. Database is configured and migration is already present. It will be created when the application runs for the first time automatically. Only the connection string in appsettings.json needs to be changed accordingly.
 2. If database is to be updated with changes "Update-database" command will update the database.
 
 
 How to run application
-Approch 1 : Through visual studio
+
+**Approch 1 : Through visual studio**
+
 Step 1: Clone repo:
 git clone https://github.com/avay-azad/AdForm.git
 
@@ -28,13 +28,15 @@ Step 2: AdForm.Backend solution in visual studio
 Step 3 : setup statup project ToDoApp and run application
 
 
-Approch 2 : Through .Net Cli command
+**Approch 2 : Through .Net Cli command**
 
 Step 1: Clone repo in destination folder: git clone https://github.com/avay-azad/AdForm.git
 
 Step 2: Go to the project folder and run “dotnet restore” in cmd.
 
 Step 3: Go the folder “AdForm.Backend\Services\HomeWorkToDoApp\ToDoApp.Api” and run “dotnet run” in cmd.
+
+Navigate to http://localhost:5000/ to test Api in swagger
 
 Navigate to http://localhost:5000/PlayGround to play with GraphQl UI.
 
@@ -43,13 +45,16 @@ Authorization
 
 Send token in "Authorization" header as "Bearer <token>" (Example: "Bearer sampletoken")
 
-I have created 3 user 
+**Created 3 user for Testing**
+ 
 1)UserName = "avay",Password = "Avay@123"
-1)UserName = "amar",Password = "Amar@123",
-1)UserName = "azad",Password = "Azad@123",
+ 
+2)UserName = "amar",Password = "Amar@123",
+ 
+3)UserName = "azad",Password = "Azad@123",
 
 
-Note - 
+**Note - **
 1. A user has to create todo list first in order to add todo item. 
 2. One username can not be registered again.
 3. symetric encryption/decryption and Base64 password encoding algorithm is used.
