@@ -1,3 +1,6 @@
+using AutoMapper;
+using ToDoApp.Business;
+
 namespace AdForm.Backend.Test
 {
     /// <summary>
@@ -5,16 +8,16 @@ namespace AdForm.Backend.Test
     /// </summary>
     public class MapperInitiator
     {
-        //protected MapperInitiator()
-        //{
-        //    var mappingConfig = new MapperConfiguration(mc =>
-        //    {
-        //        mc.AddProfile(new MappingProfile());
-        //    });
+        protected MapperInitiator()
+        {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
 
-        //    Mapper = mappingConfig.CreateMapper();
-        //}
+            Mapper = mappingConfig.CreateMapper();
+        }
 
-        //public IMapper Mapper { get; }
+        public IMapper Mapper { get; }
     }
 }

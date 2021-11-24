@@ -15,13 +15,11 @@ namespace ToDoApp.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly ILogger<UserController> _logger;
         private readonly IJwtUtils _jwtUtils;
         private readonly IUserAppService _userAppService;
 
-        public UserController(ILogger<UserController> logger, IJwtUtils jwtUtils, IUserAppService userAppService)
+        public UserController(IJwtUtils jwtUtils, IUserAppService userAppService)
         {
-            _logger = logger;
             _jwtUtils = jwtUtils;
             _userAppService = userAppService;
         }

@@ -12,4 +12,3 @@ C:\ProjectAssignment\AdForm.Backend\Core\AdForm.Core\obj\Debug\netcoreapp3.1\AdF
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.Core\obj\Debug\netcoreapp3.1\AdForm.Core.AssemblyInfo.cs
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.Core\obj\Debug\netcoreapp3.1\AdForm.Core.dll
 C:\ProjectAssignment\AdForm.Backend\Core\AdForm.Core\obj\Debug\netcoreapp3.1\AdForm.Core.pdb
-C:\ProjectAssignment\AdForm.Backend\Core\AdForm.Core\obj\Debug\netcoreapp3.1\AdForm.Core.csprojAssemblyReference.cache
