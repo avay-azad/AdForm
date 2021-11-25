@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AdForm.Core;
+using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -28,7 +29,7 @@ namespace ToDoApp.Api
         /// <returns></returns>
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (request.Headers.TryGetValues("X-Correlation-Id", out IEnumerable<string> headerEnumerable))
+            if (request.Headers.TryGetValues(HttpRequestHeaders.CorrelationId, out IEnumerable<string> headerEnumerable))
             {
                 _logger.LogInformation("Request has the following correlation ID header {CorrelationId}.", headerEnumerable.FirstOrDefault());
             }

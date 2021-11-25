@@ -27,7 +27,7 @@ namespace ToDoApp.Api
                 options.IgnoreRequestHeader = false;
                 options.IncludeInResponse = true;
                 options.RequestHeader = HttpRequestHeaders.CorrelationId;
-                options.ResponseHeader = "X-Correlation-Id";
+                options.ResponseHeader = HttpRequestHeaders.CorrelationId;
                 options.UpdateTraceIdentifier = false;
             });
             return services;
