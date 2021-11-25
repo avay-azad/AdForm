@@ -21,35 +21,35 @@ namespace AdForm.DBService
            
             modelBuilder.Entity<Users>()
            .Property(b => b.CreatedDate)
-           .HasDefaultValueSql("getdate()");
+           .HasDefaultValueSql("getutcdate()");
 
             modelBuilder.Entity<Users>()
            .Property(b => b.UpdatedDate)
-           .HasDefaultValueSql("getdate()");
+           .HasDefaultValueSql("getutcdate()");
 
             modelBuilder.Entity<Labels>()
           .Property(b => b.CreatedDate)
-          .HasDefaultValueSql("getdate()");
+          .HasDefaultValueSql("getutcdate()");
 
             modelBuilder.Entity<Labels>()
            .Property(b => b.UpdatedDate)
-           .HasDefaultValueSql("getdate()");
+           .HasDefaultValueSql("getutcdate()");
 
             modelBuilder.Entity<ToDoItems>()
           .Property(b => b.CreatedDate)
-          .HasDefaultValueSql("getdate()");
+          .HasDefaultValueSql("getutcdate()");
 
             modelBuilder.Entity<ToDoItems>()
            .Property(b => b.UpdatedDate)
-           .HasDefaultValueSql("getdate()");
+           .HasDefaultValueSql("getutcdate()");
 
             modelBuilder.Entity<ToDoLists>()
           .Property(b => b.CreatedDate)
-          .HasDefaultValueSql("getdate()");
+          .HasDefaultValueSql("getutcdate()");
 
             modelBuilder.Entity<ToDoLists>()
            .Property(b => b.UpdatedDate)
-           .HasDefaultValueSql("getdate()");
+           .HasDefaultValueSql("getutcdate()");
 
             modelBuilder.Entity<Users>().HasData(new Users
             {
