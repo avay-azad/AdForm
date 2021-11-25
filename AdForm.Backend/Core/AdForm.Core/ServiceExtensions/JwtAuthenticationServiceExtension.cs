@@ -5,7 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
 
-namespace ToDoApp.Api
+namespace AdForm.Core
 {
     /// <summary>
     /// Implements extension method for adding jwtauthentication service.

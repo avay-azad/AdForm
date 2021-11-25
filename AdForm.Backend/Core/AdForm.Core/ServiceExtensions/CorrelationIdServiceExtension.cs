@@ -1,10 +1,9 @@
-﻿using AdForm.Core;
-using CorrelationId.DependencyInjection;
+﻿using CorrelationId.DependencyInjection;
 using CorrelationId.HttpClient;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace ToDoApp.Api
+namespace AdForm.Core
 {
     /// <summary>
     /// Extension for IService collection for adding CorrelationId Handler and setting defaults.

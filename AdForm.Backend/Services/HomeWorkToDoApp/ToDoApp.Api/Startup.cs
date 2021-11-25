@@ -16,6 +16,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Linq;
+using System.Reflection;
 using ToDoApp.Business;
 using ToDoApp.DataService;
 
@@ -49,7 +50,7 @@ namespace ToDoApp.Api
             services.AddHttpContextAccessor();
 
             ConfigureGraphQl(services);
-            RegisterLogging(services);
+            services.RegisterLogging(Configuration);
 
             var mapperConfig = new MapperConfiguration(mc =>
             {
@@ -64,27 +65,11 @@ namespace ToDoApp.Api
             AddAdFormAssignmentDBServices(services);
             AddAdFormValidator(services);
             AddAdFormServices(services);
-            services.AddSwagger();
-
+            var apiXmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            services.AddSwagger(apiXmlFileName);
             services.AddJwtAuthentication(Configuration);
-            services.AddApiVersioning(x =>
-            {
-                x.DefaultApiVersion = new ApiVersion(1, 0);
-                x.AssumeDefaultVersionWhenUnspecified = true;
-                x.ReportApiVersions = true;
-            });
-            services.AddVersionedApiExplorer(options =>
-            {
-                // add the versioned api explorer, which also adds IApiVersionDescriptionProvider service  
-                // note: the specified format code will format the version as "'v'major[.minor][-status]"  
-                options.GroupNameFormat = "'v'VVV";
+        
 
-                // note: this option is only necessary when versioning by url segment. the SubstitutionFormat  
-                // can also be used to control the format of the API version in route templates  
-                options.SubstituteApiVersionInUrl = true;
-            });
-            services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
-            services.AddSwaggerGen(options => options.OperationFilter<SwaggerDefaultValues>());
         }
 
 
@@ -186,12 +171,6 @@ namespace ToDoApp.Api
             services.AddScoped<IToDoListDataService, ToDoListDataService>();
             services.AddScoped<ILableAppService, LableAppService>();
             services.AddScoped<ILabelDataService, LabelDataService>();
-        }
-
-        private void RegisterLogging(IServiceCollection services)
-        {
-            var serilog = new SerilogLogging();
-            serilog.Loging(services, Configuration);
         }
 
     }

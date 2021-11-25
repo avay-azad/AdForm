@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ToDoApp.Api
+namespace AdForm.Core
 {
     /// <summary>
     /// Implements method for forwarding CorrelationID in HttpRequestheader.
