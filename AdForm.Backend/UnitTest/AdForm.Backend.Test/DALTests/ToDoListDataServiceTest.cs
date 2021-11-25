@@ -63,7 +63,7 @@ namespace AdForm.Backend.Test.DALTests
         /// </summary>
         /// <returns></returns>
         [Test]
-        public async Task AddToDoList()
+        public async Task AddToDoListTest()
         {
             ToDoLists todoList = await _toDoListDataService.AddAsync(new ToDoLists { Name = "Buy Laptop", UserId = 1 });
             Assert.IsNotNull(todoList);
@@ -74,7 +74,7 @@ namespace AdForm.Backend.Test.DALTests
         /// Test to update existing ToDoList record.
         /// </summary>
         [Test]
-        public async Task UpdateToDoList()
+        public async Task UpdateToDoListTest()
         {
             ToDoLists todoList = await _toDoListDataService.UpdateAsync(new ToDoLists { Name = "Sell Laptop", UserId = 1, ToDoListId = 2 });
             Assert.IsNotNull(todoList);
@@ -85,7 +85,7 @@ namespace AdForm.Backend.Test.DALTests
         /// test to delete existing ToDoList record.
         /// </summary>
         [Test]
-        public async Task DeleteToDoList()
+        public async Task DeleteToDoListTest()
         {
             ToDoLists todoList = await _toDoListDataService.GetByIdAsync(2, 1);
             ToDoLists deletedTodoList = await _toDoListDataService.DeleteAsync(todoList);

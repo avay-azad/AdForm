@@ -89,7 +89,7 @@ namespace AdForm.Backend.Test.ServiceTest
         /// </summary>
         /// <returns></returns>
         [Test]
-        public async Task GetToDoListById()
+        public async Task GetToDoListByIdTest()
         {
             ToDoListResponseDto result = await _toDoListAppService.GetByIdAsync(1, 1);
             Assert.IsNotNull(result);
@@ -101,7 +101,7 @@ namespace AdForm.Backend.Test.ServiceTest
         /// </summary>
         /// <returns></returns>
         [Test]
-        public async Task GetToDoLists()
+        public async Task GetToDoListsTest()
         {
             PagedList<ToDoListResponseDto> result = await _toDoListAppService.GetAllAsync(paginationParameters, 1);
             Assert.IsNotNull(result);

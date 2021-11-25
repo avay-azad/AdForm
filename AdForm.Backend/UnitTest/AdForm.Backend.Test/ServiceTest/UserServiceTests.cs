@@ -37,7 +37,7 @@ namespace AdForm.Backend.Test.ServiceTest
         /// </summary>
         /// <returns></returns>
         [Test]
-        public async Task Authenticate_ValidUserNameAndPassword()
+        public async Task Authenticate_ValidUserNameAndPasswordTest()
         {
             _userDataService.Setup(p => p.GetUsers(It.IsAny<Users>())).Returns(Task.FromResult(_validUser));
             long userId = await _userAppService.AuthenticateUser(new LoginRequestDto() { UserName = "Avay", Password = "Avay@123" });
@@ -50,7 +50,7 @@ namespace AdForm.Backend.Test.ServiceTest
         /// </summary>
         /// <returns></returns>
         [Test]
-        public async Task Authenticate_InvalidUserNameAndPassword()
+        public async Task Authenticate_InvalidUserNameAndPasswordTest()
         {
             try
             {
