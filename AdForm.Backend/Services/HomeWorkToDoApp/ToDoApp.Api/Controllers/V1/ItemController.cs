@@ -160,6 +160,20 @@ namespace ToDoApp.Api.Controllers.V1
         /// <param name="request"></param>
         /// <param name="id"></param>
         /// <returns>Returns Action result type based on Success/Failure.</returns>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///
+        ///     Patch /List
+        ///     [
+        ///        {
+        ///             "op": "Replace",
+        ///             "path": "Name",
+        ///             "value": "AvayItemUpdatePatch1"
+        ///         }
+        ///     ]
+        ///
+        /// </remarks>
         /// <response code="200"> Updates specific todoitem record with details provided.</response>
         /// <response code="404"> A record with the specified todolist ID was not found.</response>
         /// <response code="401"> Authorization information is missing or invalid.</response>
