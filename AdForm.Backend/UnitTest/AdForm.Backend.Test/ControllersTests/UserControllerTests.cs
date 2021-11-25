@@ -17,6 +17,7 @@ namespace AdForm.Backend.Test.ControllersTests
     {
         private UserController _userController;
         private IOptions<AppSettings> _options;
+    
         /// <summary>
         /// Setup.
         /// </summary>

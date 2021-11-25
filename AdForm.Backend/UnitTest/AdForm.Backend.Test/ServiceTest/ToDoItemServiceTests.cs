@@ -50,6 +50,11 @@ namespace AdForm.Backend.Test.ServiceTest
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.ToDoItemId);
         }
+
+        /// <summary>
+        /// Update existing to do item
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task UpdateToDoItemTest()
         {
@@ -64,6 +69,11 @@ namespace AdForm.Backend.Test.ServiceTest
             }
 
         }
+
+        /// <summary>
+        /// Delete existing ToDoitem test
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task DeleteToDoItemTest()
         {
@@ -77,6 +87,11 @@ namespace AdForm.Backend.Test.ServiceTest
                 Assert.IsTrue(false);
             }
         }
+
+        /// <summary>
+        /// Get ToDoItem by id test
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task GetToDoItemById()
         {
@@ -85,6 +100,10 @@ namespace AdForm.Backend.Test.ServiceTest
             Assert.AreEqual(1, result.ToDoItemId);
         }
 
+        /// <summary>
+        /// Get to do items
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task GetToDoItems()
         {

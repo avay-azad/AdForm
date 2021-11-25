@@ -45,6 +45,7 @@ namespace AdForm.Backend.Test.DALTests
             Assert.IsNotNull(label);
             Assert.IsTrue(label.LabelId == 1);
         }
+
         /// <summary>
         /// Get label by lable Name test.
         /// </summary>
@@ -56,6 +57,7 @@ namespace AdForm.Backend.Test.DALTests
             Assert.IsNotNull(label);
             Assert.IsTrue(label.Name == "something");
         }
+
         /// <summary>
         /// Add label test.
         /// </summary>
@@ -67,6 +69,7 @@ namespace AdForm.Backend.Test.DALTests
             Assert.IsNotNull(addedLabel);
             Assert.AreEqual("blue", addedLabel.Name);
         }
+
         /// <summary>
         /// test to delete existing Label record.
         /// </summary>

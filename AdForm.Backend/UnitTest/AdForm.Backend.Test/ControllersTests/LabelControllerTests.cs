@@ -10,6 +10,7 @@ namespace AdForm.Backend.Test.ControllersTests
     public class LabelControllerTests : BaseController
     {
         private LabelController _labelController;
+     
         /// <summary>
         /// Setup.
         /// </summary>
@@ -27,6 +28,7 @@ namespace AdForm.Backend.Test.ControllersTests
         /// </summary>
         /// <returns></returns>
         [Test]
+       
         public async Task AddLabelTest()
         {
             IActionResult result = await _labelController.Post(new LabelRequestDto { Name = "Labeltest" }, new CreateLabelRequestValidator { });

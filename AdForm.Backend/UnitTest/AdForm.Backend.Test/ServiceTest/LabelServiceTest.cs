@@ -65,6 +65,10 @@ namespace AdForm.Backend.Test.ServiceTest
             }
         }
 
+        /// <summary>
+        /// get lable by Id test
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task GetLabelById()
         {
@@ -73,6 +77,10 @@ namespace AdForm.Backend.Test.ServiceTest
             Assert.AreEqual(1, result.LabelId);
         }
 
+        /// <summary>
+        /// Get labels
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task GetLabels()
         {

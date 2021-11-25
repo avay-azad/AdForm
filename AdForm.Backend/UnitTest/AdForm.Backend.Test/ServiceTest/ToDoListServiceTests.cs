@@ -46,6 +46,11 @@ namespace AdForm.Backend.Test.ServiceTest
             Assert.IsNotNull(result);
             Assert.AreEqual(1, result.ToDoListId);
         }
+
+        /// <summary>
+        /// update existing ToDoList test
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task UpdateToDoListTest()
         {
@@ -60,6 +65,11 @@ namespace AdForm.Backend.Test.ServiceTest
             }
 
         }
+
+        /// <summary>
+        /// Delete existing ToDoList test
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task DeleteToDoListTest()
         {
@@ -73,6 +83,11 @@ namespace AdForm.Backend.Test.ServiceTest
                 Assert.IsTrue(false);
             }
         }
+
+        /// <summary>
+        /// Get ToDoListt by id test
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task GetToDoListById()
         {
@@ -81,6 +96,10 @@ namespace AdForm.Backend.Test.ServiceTest
             Assert.AreEqual(1, result.ToDoListId);
         }
 
+        /// <summary>
+        /// Get all TodoList test
+        /// </summary>
+        /// <returns></returns>
         [Test]
         public async Task GetToDoLists()
         {
