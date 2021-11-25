@@ -54,7 +54,7 @@ namespace ToDoApp.Api.Controllers.V1
             };
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-            return Ok(new APIResponse<PagedList<ToDoListResponseDto>> { IsSucess = true, Result = items });
+            return Ok(new APIResponse<PagedList<ToDoListResponseDto>> { IsSuccess = true, Result = items });
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace ToDoApp.Api.Controllers.V1
             var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
             var toDolist = await _toDoListAppService.GetByIdAsync(id, userId);
 
-            return Ok(new APIResponse<ToDoListResponseDto> { IsSucess = true, Result = toDolist });
+            return Ok(new APIResponse<ToDoListResponseDto> { IsSuccess = true, Result = toDolist });
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace ToDoApp.Api.Controllers.V1
 
             await _toDoListAppService.UpdateAsync(id, request);
 
-            return Ok(new APIResponse<object> { IsSucess = true, Result = null });
+            return Ok(new APIResponse<object> { IsSuccess = true, Result = null });
         }
 
         /// <summary>
@@ -175,7 +175,7 @@ namespace ToDoApp.Api.Controllers.V1
 
             await _toDoListAppService.DeleteAsync(id, userId);
 
-            return Ok(new APIResponse<object> { IsSucess = true, Result = null });
+            return Ok(new APIResponse<object> { IsSuccess = true, Result = null });
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace ToDoApp.Api.Controllers.V1
 
             await _toDoListAppService.UpdateToDoListPatchAsync(id, userId, request);
 
-            return Ok(new APIResponse<object> { IsSucess = true, Result = null });
+            return Ok(new APIResponse<object> { IsSuccess = true, Result = null });
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace ToDoApp.Api.Controllers.V1
             request.UserId = userId;
 
             bool isAssigned = await _toDoListAppService.AssignLabel(id, request, lableAppService);
-            return Ok(new APIResponse<object> { IsSucess = isAssigned, Result = null });
+            return Ok(new APIResponse<object> { IsSuccess = isAssigned, Result = null });
         }
     }
 }

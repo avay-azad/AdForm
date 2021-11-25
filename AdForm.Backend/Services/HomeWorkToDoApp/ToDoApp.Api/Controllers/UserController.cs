@@ -49,7 +49,7 @@ namespace ToDoApp.Api.Controllers
             long userId = await _userAppService.AuthenticateUser(request);
 
             var token = _jwtUtils.GenerateToken(userId);
-            return Ok(new APIResponse<string> { IsSucess = true, Result = token });
+            return Ok(new APIResponse<string> { IsSuccess = true, Result = token });
         }
     }
 

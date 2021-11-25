@@ -51,7 +51,7 @@ namespace ToDoApp.Api.Controllers.V1
             };
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(metadata));
-            return Ok(new APIResponse<PagedList<LabelResponseDto>> { IsSucess = true, Result = labels });
+            return Ok(new APIResponse<PagedList<LabelResponseDto>> { IsSuccess = true, Result = labels });
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace ToDoApp.Api.Controllers.V1
         {
             var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
             var label = await _lableAppService.GetByIdAsync(id, userId);
-            return Ok(new APIResponse<LabelResponseDto> { IsSucess = true, Result = label });
+            return Ok(new APIResponse<LabelResponseDto> { IsSuccess = true, Result = label });
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace ToDoApp.Api.Controllers.V1
             var userId = Convert.ToInt64(Request.HttpContext.Items["UserId"]);
             await _lableAppService.DeleteAsync(id, userId);
 
-            return Ok(new APIResponse<object> { IsSucess = true, Result = null });
+            return Ok(new APIResponse<object> { IsSuccess = true, Result = null });
         }
     }
 }
