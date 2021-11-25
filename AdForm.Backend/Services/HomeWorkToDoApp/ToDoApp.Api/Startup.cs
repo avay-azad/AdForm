@@ -48,7 +48,6 @@ namespace ToDoApp.Api
              });
 
             services.AddHttpContextAccessor();
-
             ConfigureGraphQl(services);
             services.RegisterLogging(Configuration);
 
@@ -68,10 +67,7 @@ namespace ToDoApp.Api
             var apiXmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
             services.AddSwagger(apiXmlFileName);
             services.AddJwtAuthentication(Configuration);
-        
-
         }
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -124,11 +120,11 @@ namespace ToDoApp.Api
                 .OfType<NewtonsoftJsonPatchInputFormatter>()
                 .First();
         }
+     
         private void AddAppSettingConfig(IServiceCollection services)
         {
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
         }
-
 
         private void ConfigureGraphQl(IServiceCollection services)
         {
@@ -172,6 +168,5 @@ namespace ToDoApp.Api
             services.AddScoped<ILableAppService, LableAppService>();
             services.AddScoped<ILabelDataService, LabelDataService>();
         }
-
     }
 }
