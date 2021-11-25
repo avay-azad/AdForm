@@ -67,8 +67,13 @@ namespace ToDoApp.Business
 
         public async Task UpdateAsync(long listId, ToDoListRequestDto updateToDoListRequest)
         {
-            await GetByIdAsync(listId, updateToDoListRequest.UserId);
-            await _toDoListDataService.UpdateAsync(_mapper.Map<ToDoLists>(updateToDoListRequest));
+            var dbList = await _toDoListDataService.GetByIdAsync(listId, updateToDoListRequest.UserId);
+            if (dbList == null)
+                throw new ApiException(ErrorMessage.List_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ToDoListNotfound);
+
+            dbList.Name = updateToDoListRequest.ListName;
+
+            await _toDoListDataService.UpdateAsync(dbList);
         }
 
         public async Task UpdateToDoListPatchAsync(long listId, long userId, JsonPatchDocument list)

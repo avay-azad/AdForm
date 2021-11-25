@@ -76,7 +76,11 @@ namespace ToDoApp.Business
 
         public async Task UpdateAsync(long itemId, UpdateToDoItemRequestDto updateToDoItemRequest)
         {
-            await GetByIdAsync(itemId, updateToDoItemRequest.UserId);
+            var dbItem = await _toDoItemDataService.GetByIdAsync(itemId, updateToDoItemRequest.UserId);
+            if (dbItem == null)
+                throw new ApiException(ErrorMessage.Item_Not_Exist, HttpStatusCode.NotFound, ApiExceptionType.ToDoItemNotfound);
+
+            dbItem.Name = updateToDoItemRequest.ItemName;
             await _toDoItemDataService.UpdateAsync(_mapper.Map<ToDoItems>(updateToDoItemRequest));
         }
 
